@@ -23,4 +23,4 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::view('/order', 'order')->middleware('verified'); // email must verified before accesing this route or page
+Route::view('/order', 'order')->middleware('verified'); // email  must verified before accesing this route or page
