@@ -19,12 +19,10 @@ Route::get('/', function () {
     return view('indexAdm');
 });
 
-// this route implement must verify email
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// routes form employee
 Route::prefix('employee')->group( function () {
     Route::get('/', function () {
         return view('indexAdm');
