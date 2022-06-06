@@ -46,9 +46,9 @@
         <td>{{ $menu ->name }}</td>
         <td>{{ $menu ->price }}</td>
         <td>{{ $menu ->stock }}</td>
-        @if ($menu->menu_profile_path != NULL)
+        @if ($menu->menu_photo_path != NULL)
         @php
-        $img = $menu->menu_profile_path
+        $img = $menu->menu_photo_path
         @endphp
         @else
         @php
