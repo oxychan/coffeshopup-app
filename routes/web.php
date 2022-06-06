@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,10 @@ use App\Http\Controllers\HomeController;
 Route::get('/', function () {
     return view('index');
 });
+
+Route::get('/', [MenuController::class, 'index']);
+
+Route::resource('menu', MenuController::class);
 
 Auth::routes(['verify' => true]);
 

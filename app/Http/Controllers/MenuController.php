@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menu;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class MenuController extends Controller
 {
@@ -13,7 +15,9 @@ class MenuController extends Controller
      */
     public function index()
     {
-        //
+        $menu = Menu::all();
+        $paginate = Menu::orderBy('id', 'asc')->paginate(5);
+        return view('menu.index', ['menu'=>$menu,'paginate'=>$paginate]);
     }
 
     /**
