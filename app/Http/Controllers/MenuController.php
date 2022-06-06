@@ -16,9 +16,19 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menu = Menu::all();
-        $paginate = Menu::orderBy('id', 'asc')->paginate(5);
-        return view('menu.index', ['menu'=>$menu,'paginate'=>$paginate]);
+        if (request('search')) {
+            $paginate = Menu::where('id', 'like', '%'.request('search').'%')
+                    ->orwhere('name', 'like', '%'.request('search').'%')
+                    ->orwhere('price', 'like', '%'.request('search').'%')
+                    ->orwhere('stock', 'like', '%'.request('search').'%')
+                    ->paginate(5);
+            return view('menu.index', ['paginate'=>$paginate]);
+        }
+        else {
+            $menu = Menu::all();
+            $paginate = Menu::orderBy('id', 'asc')->paginate(5);
+            return view('menu.index', ['menu'=>$menu,'paginate'=>$paginate]);
+        }
     }
 
     /**
@@ -135,4 +145,5 @@ class MenuController extends Controller
         return redirect()->route('menu.index')
         ->with('success', 'Menu Deleted Successfully'); 
     }
+
 }
