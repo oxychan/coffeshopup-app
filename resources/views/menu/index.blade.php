@@ -55,7 +55,7 @@
         $img = 'images/default_menu.png'
         @endphp
         @endif
-        <td><img class="rounded-circle" width="50px" src="{{ asset('storage/' . $img)}}" alt="" srcset=""></td>
+        <td><img class="rounded" width="50px" height="50px" src="{{ asset('storage/' . $img)}}" alt="" srcset=""></td>
         <td>
             <form action="{{ route('menu.destroy',['menu'=>$menu->id]) }}" method="POST">
                 <a class="btn btn-info" href="{{ route('menu.show',$menu->id) }}">Show</a>
