@@ -52,15 +52,15 @@
         @endphp
         @else
         @php
-        $img = 'images/b1.png'
+        $img = 'images/default_menu.png'
         @endphp
         @endif
         <td><img class="rounded-circle" width="50px" src="{{ asset('storage/' . $img)}}" alt="" srcset=""></td>
         <td>
             <form action="{{ route('menu.destroy',['menu'=>$menu->id]) }}" method="POST">
                 <a class="btn btn-info" href="{{ route('menu.show',$menu->id) }}">Show</a>
-                {{--  <a class="btn btn-primary" href="{{ route('menu.edit',$menu->id) }}">Edit</a>
-                @csrf
+                <a class="btn btn-primary" href="{{ route('menu.edit',$menu->id) }}">Edit</a>
+                {{--  @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Delete</button>
                 <a class="btn btn-warning" href="{{ route('mahasiswa.khs',$menu->id) }}">Nilai</a>  --}}

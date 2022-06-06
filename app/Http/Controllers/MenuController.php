@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
 {
@@ -45,7 +46,7 @@ class MenuController extends Controller
         ]);
 
         if ($request->file('image')) {
-            $image_name = $request->file('image')->store('image', 'public');
+            $image_name = $request->file('image')->store('images', 'public');
         } else {
             $image_name = NULL;
         }
@@ -81,7 +82,8 @@ class MenuController extends Controller
      */
     public function edit($id)
     {
-        //
+        $menu = Menu::where('id', $id)->first();
+        return view('menu.edit', compact('menu'));
     }
 
     /**
@@ -93,7 +95,31 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'stock' => 'required',
+        ]);
+
+        $menu = Menu::where('id', $id)->first();
+        $menu->name = $request->get('name');
+        $menu->price = $request->get('price');
+        $menu->stock = $request->get('stock');
+        $menu->save();
+        
+        if ($menu->menu_photo_path && file_exists(storage_path('app/public/'.$menu->menu_photo_path))) {
+            Storage::delete('public/'.$menu->menu_photo_path);
+        } 
+        if ($request->file('image')) {
+            $image_name = $request->file('image')->store('images', 'public');
+        }else {
+            $image_name = NULL;
+        }
+        $menu->menu_photo_path = $image_name;
+        $menu->save();
+        
+        return redirect()->route('menu.index')
+        ->with('success', 'Menu Updated Successfully');
     }
 
     /**
