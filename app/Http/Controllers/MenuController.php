@@ -69,7 +69,8 @@ class MenuController extends Controller
      */
     public function show($id)
     {
-        //
+        $menu = Menu::where('id', $id)->first();
+        return view('menu.detail', compact('menu'));
     }
 
     /**

@@ -20,19 +20,19 @@
                 <form method="post" action="{{ route('menu.store') }}" id="myForm" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Nama Menu</label>
+                        <label for="name">Name</label>
                         <input type="text" name="name" class="form-control" id="name" aria-describedby="name">
                     </div>
                     <div class="form-group">
-                        <label for="price">Harga</label>
+                        <label for="price">Price</label>
                         <input type="number" name="price" class="form-control" id="price" aria-describedby="price">
                     </div>
                     <div class="form-group">
-                        <label for="stock">Jumlah Stok</label>
+                        <label for="stock">Stock</label>
                         <input type="number" name="stock" class="form-control" id="stock" aria-describedby="stock">
                     </div>
                     <div class="form-group">
-                        <label for="image">Gambar</label>
+                        <label for="image">Picture</label>
                         <input type="file" class="form-control" name="image"></br>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
