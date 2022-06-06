@@ -117,13 +117,13 @@ class MenuController extends Controller
         $menu->stock = $request->get('stock');
         $menu->save();
         
-        if ($menu->menu_photo_path && file_exists(storage_path('app/public/'.$menu->menu_photo_path))) {
-            Storage::delete('public/'.$menu->menu_photo_path);
-        } 
         if ($request->file('image')) {
+            if ($menu->menu_photo_path && file_exists(storage_path('app/public/'.$menu->menu_photo_path))) {
+                Storage::delete('public/'.$menu->menu_photo_path);
+            } 
             $image_name = $request->file('image')->store('images', 'public');
         } else {
-            $image_name = NULL;
+            $image_name = $menu->menu_photo_path;
         }
         $menu->menu_photo_path = $image_name;
         $menu->save();
