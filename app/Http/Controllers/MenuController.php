@@ -112,7 +112,7 @@ class MenuController extends Controller
         } 
         if ($request->file('image')) {
             $image_name = $request->file('image')->store('images', 'public');
-        }else {
+        } else {
             $image_name = NULL;
         }
         $menu->menu_photo_path = $image_name;
@@ -130,6 +130,9 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Menu::where('id', $id)->delete();
+        
+        return redirect()->route('menu.index')
+        ->with('success', 'Menu Deleted Successfully'); 
     }
 }

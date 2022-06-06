@@ -60,10 +60,9 @@
             <form action="{{ route('menu.destroy',['menu'=>$menu->id]) }}" method="POST">
                 <a class="btn btn-info" href="{{ route('menu.show',$menu->id) }}">Show</a>
                 <a class="btn btn-primary" href="{{ route('menu.edit',$menu->id) }}">Edit</a>
-                {{--  @csrf
+                @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Delete</button>
-                <a class="btn btn-warning" href="{{ route('mahasiswa.khs',$menu->id) }}">Nilai</a>  --}}
             </form>
         </td>
     </tr>
