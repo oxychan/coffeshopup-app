@@ -1,31 +1,50 @@
-@extends('menu.layout')
-@section('content')
-<div class="container mt-5">
-    <div class="row justify-content-center align-items-center">
-        <div class="card" style="width: 24rem;">
-            <div class="card-header">
-                Detail Menu
+@extends('layouts.menuLayout')
+@section('container')
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-header">
+                        <a style="text-decoration: none;" class="text-dark" href="{{ route('menu.index') }}">Menu / </a>
+                        <a style="text-decoration: none;" class="text-dark font-weight-bold" href="#">Detail Menu</a>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped table-hover">
+                            <tr>
+                                <th>Menu Id</th>
+                                <td>{{$menu->id}}</td>
+                            </tr>
+                            <tr>
+                                <th>Name</th>
+                                <td>{{$menu->name}}</td>
+                            </tr>
+                            <tr>
+                                <th>Price</th>
+                                <td>{{$menu->price}}</td>
+                            </tr>
+                            <tr>
+                                <th>Price</th>
+                                <td>{{$menu->stock}}</td>
+                            </tr>
+                            <tr>
+                                <th>Picture</th>
+                                @if ($menu->menu_photo_path != NULL)
+                                @php
+                                $img = $menu->menu_photo_path
+                                @endphp
+                                @else
+                                @php
+                                $img = 'images/default_menu.png'
+                                @endphp
+                                @endif
+                                <td><img width="100px" class="rounded" src="{{ asset('storage/' . $img) }}"></td>
+                            </tr>
+                        </table>
+                        <a class="btn btn-success mt-3" href="{{ route('menu.index') }}">Kembali</a>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><b>Id: </b>{{$menu->id}}</li>
-                    <li class="list-group-item"><b>Name: </b>{{$menu->name}}</li>
-                    <li class="list-group-item"><b>Price: </b>{{$menu->price}}</li>
-                    <li class="list-group-item"><b>Stock: </b>{{$menu->stock}}</li>
-                    @if ($menu->menu_photo_path != NULL)
-                    @php
-                    $img = $menu->menu_photo_path
-                    @endphp
-                    @else
-                    @php
-                    $img = 'images/default_menu.png'
-                    @endphp
-                    @endif
-                    <li class="list-group-item"><b>Picture: </b><img width="50px"
-                            src="{{ asset('storage/' . $img) }}"></li>
-                </ul>
-            </div>
-            <a class="btn btn-success mt-3" href="{{ route('menu.index') }}">Kembali</a>
         </div>
     </div>
 </div>

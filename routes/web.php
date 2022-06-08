@@ -17,10 +17,10 @@ use App\Http\Controllers\MenuController;
 */
 
 Route::get('/', function () {
-    return view('indAdm');
+    return view('index');
 });
 
-Route::get('/', [MenuController::class, 'index']);
+Route::get('/menu', [MenuController::class, 'index']);
 
 Route::resource('menu', MenuController::class);
 
@@ -33,7 +33,7 @@ Route::view('/order', 'order')->middleware('verified'); // email must verified b
 // routes for employee
 Route::prefix('employee')->group( function () {
     Route::get('/', function () {
-        return view('indexAdm');
+        return view('dashboard');
     });
     Route::get('/ui-features/buttons', function () {
         return view('employee.ui-features.buttons');
