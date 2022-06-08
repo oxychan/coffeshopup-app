@@ -17,10 +17,10 @@ use App\Http\Controllers\MenuController;
 */
 
 Route::get('/', function () {
-    return view('indAdm');
+    return view('index');
 });
 
-Route::get('/', [MenuController::class, 'index']);
+// Route::get('/', [MenuController::class, 'index']);
 
 Route::resource('menu', MenuController::class);
 

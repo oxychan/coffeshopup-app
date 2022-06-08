@@ -56,21 +56,27 @@
         <div class="container">
             <div class="row align-items-center justify-content-between d-flex">
                 <div id="logo">
-                    <a href="index.html"><img src="img/logo.png" alt="" title="" /></a>
+                    <a href="#"><img src="img/logo.png" alt="" title="" /></a>
                 </div>
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">
                         <li class="menu-active"><a href="#home">Home</a></li>
                         <li><a href="#about">About</a></li>
-                        <li><a href="#coffee">Coffee</a></li>
+                        <li><a href="#coffee">Menu</a></li>
                         <li><a href="#review">Review</a></li>
-                        <li><a href="#blog">Blog</a></li>
-                        <li class="menu-has-children"><a href="">Pages</a>
-                            <ul>
-                                <li><a href="generic.html">Generic</a></li>
-                                <li><a href="elements.html">Elements</a></li>
-                            </ul>
-                        </li>
+                        @guest
+                            <li><a href="{{ route('login') }}" class="btn btn-primary">Login</a></li>
+                        @endguest
+                        @auth
+                            <li>
+                                <form action="/logout" method="post">
+                                    @csrf
+                                    <a>Halo {{auth()->user()->name }}, </a> 
+                                    <input type="submit" value="Logout">
+                                </form>
+                            </li>
+                            
+                        @endauth
                     </ul>
                 </nav><!-- #nav-menu-container -->
             </div>
