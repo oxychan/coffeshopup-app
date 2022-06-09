@@ -62,13 +62,10 @@
                                     @endif
                                     <td><img class="rounded" width="50px" height="50px" src="{{ asset('storage/' . $img)}}" alt="" srcset=""></td>
                                     <td>
-                                        <form action="{{ route('menu.destroy',['menu'=>$menu->id]) }}" method="POST">
-                                            <a class="btn btn-info" href="{{ route('menu.show',$menu->id) }}">Show</a>
-                                            <a class="btn btn-primary" href="{{ route('menu.edit',$menu->id) }}">Edit</a>
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" onClick="confirm_modal_delete('');" class="btn btn-danger">Delete</button>
-                                        </form>
+                                        <a class="btn btn-info" href="{{ route('menu.show',$menu->id) }}">Show</a>
+                                        <a class="btn btn-primary" href="{{ route('menu.edit',$menu->id) }}">Edit</a>
+                                        <a class="btn btn-primary" onclick="confirm_modal_delete()">Delete</a>
+                                    
                                     </td>
                                 </tr>
                                 @endforeach
@@ -93,7 +90,11 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-footer" style="margin:0px; border-top:0px; text-align:center;">
-                <a href="#" class="btn btn-danger btn-sm" id="delete_link">Delete</a>
+                <form action="{{ route('menu.destroy',['menu'=>$menu->id]) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
                 <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Cancel</button>
             </div>
         </div>
@@ -102,10 +103,10 @@
 
 <!-- Javascript untuk popup modal OK-->
 <script type="text/javascript">
-    function confirm_modal_delete(delete_url)
+    function confirm_modal_delete()
     {
         $('#delete_modal').modal('show', {backdrop: 'static'});
-        document.getElementById('delete_link').setAttribute('href' , delete_url);
+        document.getElementById('delete_link');
     }
 </script>
 @endsection
