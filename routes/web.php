@@ -17,23 +17,25 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [HomeController::class, 'index']);
 
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+// Route::get('/home', [HomeController::class, 'index']);
 // route for guest
 Route::group(['middleware' => ['guest']], function() {
-    Auth::routes(['verify' => true]);
+    Route::get('/all-menus', function() {
+        return view('user.menus');
+    });
 });
+
+Auth::routes(['verify' => true]);
 
 Route::get('logout', [LoginController::class, 'logout']);
 
 // route for buyer
 Route::group(['middleware' => ['auth', 'role:buyer']], function() {
-    Route::view('/order', 'order')->middleware('verified'); // email must verified before accesing this route or page
+    Route::get('/order', function() {
+        return view('user.order');
+    })->middleware('verified'); // email must verified before accesing this route or page
 });
 
 
