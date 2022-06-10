@@ -27,7 +27,7 @@ class MenuController extends Controller
         else {
             $menu = Menu::all();
             $paginate = Menu::orderBy('id', 'asc')->paginate(5);
-            return view('menu.index', ['menu'=>$menu,'paginate'=>$paginate]);
+            return view('employee.staff-dapur.menu.index', ['menu'=>$menu,'paginate'=>$paginate]);
         }
     }
 
@@ -81,7 +81,7 @@ class MenuController extends Controller
     public function show($id)
     {
         $menu = Menu::where('id', $id)->first();
-        return view('menu.detail', compact('menu'));
+        return view('employee.staff-dapur.menu.detail', compact('menu'));
     }
 
     /**

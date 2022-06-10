@@ -64,7 +64,8 @@
                                     <td>
                                         <a class="btn btn-info" href="{{ route('menu.show',$menu->id) }}">Show</a>
                                         <a class="btn btn-primary" href="{{ route('menu.edit',$menu->id) }}">Edit</a>
-                                        <a class="btn btn-primary" onclick="confirm_modal_delete()">Delete</a>
+                                        <button onclick="show_alert({{$menu->id}})" class="btn btn-danger">Delete</button>
+                                        {{-- <a class="btn btn-primary" onclick="confirm_modal_delete()">Delete</a> --}}
                                     
                                     </td>
                                 </tr>
@@ -90,9 +91,10 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-footer" style="margin:0px; border-top:0px; text-align:center;">
-                <form action="{{ route('menu.destroy',['menu'=>$menu->id]) }}" method="POST">
+                <form method="POST" id="del">
                     @csrf
-                    @method('DELETE')
+                    
+
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
                 <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Cancel</button>
@@ -103,10 +105,16 @@
 
 <!-- Javascript untuk popup modal OK-->
 <script type="text/javascript">
-    function confirm_modal_delete()
+    var deletedId = 0;
+    function show_alert(id)
     {
         $('#delete_modal').modal('show', {backdrop: 'static'});
-        document.getElementById('delete_link');
+        deletedId = id;
+        // alert(deletedId);
+        var action = "/menu/destroy/" + deletedId +"";
+        // alert(action);
+        $('#del').attr("action", action);
     }
-</script>
+
+  </script>
 @endsection
