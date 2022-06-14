@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\MenuController;
 
 /*
@@ -16,20 +17,21 @@ use App\Http\Controllers\MenuController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 
 Route::get('/menu', [MenuController::class, 'index']);
-
 Route::post('menu/destroy/{id}', [MenuController::class, 'destroy']);
-
 Route::resource('menu', MenuController::class);
-Auth::routes(['verify' => true]);
 
+Route::get('/payment', [PaymentController::class, 'index']);
+Route::resource('payment', PaymentController::class);
+
+Auth::routes(['verify' => true]);
+Route::view('/order', 'order')->middleware('verified'); // email must verified before accesing this route or page
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::view('/order', 'order')->middleware('verified'); // email must verified before accesing this route or page
 
 // routes for employee
 Route::prefix('employee')->group( function () {

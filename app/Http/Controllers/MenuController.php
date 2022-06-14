@@ -22,7 +22,7 @@ class MenuController extends Controller
                     ->orwhere('price', 'like', '%'.request('search').'%')
                     ->orwhere('stock', 'like', '%'.request('search').'%')
                     ->paginate(5);
-            return view('menu.index', ['paginate'=>$paginate]);
+            return view('employee.staff-dapur.menu.index', ['paginate'=>$paginate]);
         }
         else {
             $menu = Menu::all();
@@ -38,7 +38,7 @@ class MenuController extends Controller
      */
     public function create()
     {
-        return view('menu.create');
+        return view('employee.staff-dapur.menu.create');
     }
 
     /**
@@ -93,7 +93,7 @@ class MenuController extends Controller
     public function edit($id)
     {
         $menu = Menu::where('id', $id)->first();
-        return view('menu.edit', compact('menu'));
+        return view('employee.staff-dapur.menu.edit', compact('menu'));
     }
 
     /**
