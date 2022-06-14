@@ -5,13 +5,10 @@
 <section class="menu-area pt-4" id="coffee">
 	<div class="container">
 		<div class="row d-flex justify-content-center">
-			<form action="">
-				{{-- <div class="mb-3">
-					<input type="text" class="form-control-lg" id="search" placeholder="Enter keyword">
-				</div> --}}
-				<div class="input-group input-group-lg mb-4">
-					<span class="input-group-text bg-white" id="search-label"><i class="fa-solid fa-magnifying-glass"></i></span>
-					<input type="text" class="form-control" aria-label="search" aria-describedby="searching" placeholder="Enter keyword">
+			<form action="#">
+				<div class="input-group mb-3">
+					<input type="text" class="form-control" placeholder="Search . . . " name="search">
+					<button class="btn btn-default" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 				</div>
 			</form>
 		</div>
