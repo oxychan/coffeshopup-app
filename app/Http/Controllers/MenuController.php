@@ -25,9 +25,9 @@ class MenuController extends Controller
             return view('menu.index', ['paginate'=>$paginate]);
         }
         else {
-            $menu = Menu::all();
+            $menus = Menu::all();
             $paginate = Menu::orderBy('id', 'asc')->paginate(5);
-            return view('menu.index', ['menu'=>$menu,'paginate'=>$paginate]);
+            return view('menu.index', ['menus'=>$menus,'paginate'=>$paginate]);
         }
     }
 
