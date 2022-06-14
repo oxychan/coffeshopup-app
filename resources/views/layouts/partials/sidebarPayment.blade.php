@@ -8,8 +8,8 @@
           <!--change to offline or busy as needed-->
         </div>
         <div class="nav-profile-text d-flex flex-column">
-          <span class="font-weight-bold mb-2">Taufik Anwar</span>
-          <span class="text-secondary text-small">Staff Dapur</span>
+          <span class="font-weight-bold mb-2">Atmayanti</span>
+          <span class="text-secondary text-small">Kasir</span>
         </div>
         <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
       </a>
@@ -21,8 +21,8 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{{ route('menu.index') }}">
-        <span class="menu-title">Menus Table</span>
+      <a class="nav-link" href="{{ route('payment.index') }}">
+        <span class="menu-title">Payments Table</span>
         <i class="mdi mdi-table-large menu-icon"></i>
       </a>
     </li>
