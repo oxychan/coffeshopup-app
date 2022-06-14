@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -22,7 +24,8 @@ class PaymentController extends Controller
                     ->paginate(5);
             return view('employee.kasir.payment.index', ['paginate'=>$paginate]);
         }
-        $payment = Payment::all();
+        $payment = Payment::with('order')->get();
+        // $order = Order::with('orderDetail')->get();
         $paginate = Payment::orderBy('id', 'asc')->paginate(5);
         return view('employee.kasir.payment.index', ['payment'=>$payment,'paginate'=>$paginate]);
     }
@@ -56,7 +59,8 @@ class PaymentController extends Controller
      */
     public function show($id)
     {
-        //
+        $payment = Payment::where('id', $id)->first();
+        return view('employee.kasir.payment.detail', compact('payment'));
     }
 
     /**
