@@ -22,12 +22,12 @@ class MenuController extends Controller
                     ->orwhere('price', 'like', '%'.request('search').'%')
                     ->orwhere('stock', 'like', '%'.request('search').'%')
                     ->paginate(5);
-            return view('menu.index', ['paginate'=>$paginate]);
+            return view('employee.staff-dapur.menu.index', ['paginate'=>$paginate]);
         }
         else {
             $menu = Menu::all();
             $paginate = Menu::orderBy('id', 'asc')->paginate(5);
-            return view('menu.index', ['menu'=>$menu,'paginate'=>$paginate]);
+            return view('employee.staff-dapur.menu.index', ['menu'=>$menu,'paginate'=>$paginate]);
         }
     }
 
@@ -38,7 +38,7 @@ class MenuController extends Controller
      */
     public function create()
     {
-        return view('menu.create');
+        return view('employee.staff-dapur.menu.create');
     }
 
     /**
@@ -81,7 +81,7 @@ class MenuController extends Controller
     public function show($id)
     {
         $menu = Menu::where('id', $id)->first();
-        return view('menu.detail', compact('menu'));
+        return view('employee.staff-dapur.menu.detail', compact('menu'));
     }
 
     /**
@@ -93,7 +93,7 @@ class MenuController extends Controller
     public function edit($id)
     {
         $menu = Menu::where('id', $id)->first();
-        return view('menu.edit', compact('menu'));
+        return view('employee.staff-dapur.menu.edit', compact('menu'));
     }
 
     /**
@@ -117,13 +117,13 @@ class MenuController extends Controller
         $menu->stock = $request->get('stock');
         $menu->save();
         
-        if ($menu->menu_photo_path && file_exists(storage_path('app/public/'.$menu->menu_photo_path))) {
-            Storage::delete('public/'.$menu->menu_photo_path);
-        } 
         if ($request->file('image')) {
+            if ($menu->menu_photo_path && file_exists(storage_path('app/public/'.$menu->menu_photo_path))) {
+                Storage::delete('public/'.$menu->menu_photo_path);
+            } 
             $image_name = $request->file('image')->store('images', 'public');
         } else {
-            $image_name = NULL;
+            $image_name = $menu->menu_photo_path;
         }
         $menu->menu_photo_path = $image_name;
         $menu->save();

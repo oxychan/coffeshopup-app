@@ -32,7 +32,7 @@
                                 <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
                             </div>
                         </form>
-                        <p class="text-center">Not a member? <a data-toggle="tab" href="#signup">Sign Up</a></p>
+                        <p class="text-center">Not a member? <a data-toggle="tab" href="{{ router('register') }}">Sign Up</a></p>
                     </div>
                 </div>
             </div>
