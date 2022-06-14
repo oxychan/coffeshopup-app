@@ -38,7 +38,7 @@
                                 <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign Up</button>
                             </div>
                         </form>
-                        <p class="text-center">Have account? <a data-toggle="tab" href="#signup">Sign In</a></p>
+                        <p class="text-center">Have account? <a href="{{route('login')}}">Sign In</a></p>
                     </div>
                     <div class="img" style="background-image: url({{asset('images/bg-1.jpg')}});"></div>
                 </div>

@@ -53,124 +53,29 @@
 				</div>
 			</div>
 		</div>
+		<div class="row jsutify-content-end">
+			<div class="col-md-12 mb-3 d-flex justify-content-end">
+				<a href="/all-menus" class="primary-btn text-uppercase">Show More</a>
+			</div>
+		</div>
 		<div class="row">
-			<div class="col-lg-4">
-				<div class="single-menu">
-					<div class="title-div justify-content-between d-flex">
-						<h4>Cappuccino</h4>
-						<p class="price float-right">
-							$49
-						</p>
+			@foreach ($menus as $menu)
+				<div class="col-lg-4" id="menu" onclick="window.location.href = '/test/{{ $menu->id }}'" style="height: 230px !important">
+					<div class="single-menu">
+						<div class="row">
+							<div class="col-md-6">
+								<img src="/storage/{{ $menu->menu_photo_path }}" alt="menu" width="150px" height="150px">
+							</div>
+							<div class="col-md-6">
+								<h4>{{ substr($menu->name, 0, 25) }}</h4>
+								<hr>
+								<span><strong>Stock : </strong>{{ $menu->stock }}</span><br>
+								<span><strong>Rp. {{ $menu->price }}</strong></span>
+							</div>
+						</div>
 					</div>
-					<p>
-						Usage of the Internet is becoming more common due to rapid advance.
-					</p>
 				</div>
-			</div>
-			<div class="col-lg-4">
-				<div class="single-menu">
-					<div class="title-div justify-content-between d-flex">
-						<h4>Americano</h4>
-						<p class="price float-right">
-							$49
-						</p>
-					</div>
-					<p>
-						Usage of the Internet is becoming more common due to rapid advance.
-					</p>
-				</div>
-			</div>
-			<div class="col-lg-4">
-				<div class="single-menu">
-					<div class="title-div justify-content-between d-flex">
-						<h4>Espresso</h4>
-						<p class="price float-right">
-							$49
-						</p>
-					</div>
-					<p>
-						Usage of the Internet is becoming more common due to rapid advance.
-					</p>
-				</div>
-			</div>
-			<div class="col-lg-4">
-				<div class="single-menu">
-					<div class="title-div justify-content-between d-flex">
-						<h4>Macchiato</h4>
-						<p class="price float-right">
-							$49
-						</p>
-					</div>
-					<p>
-						Usage of the Internet is becoming more common due to rapid advance.
-					</p>
-				</div>
-			</div>
-			<div class="col-lg-4">
-				<div class="single-menu">
-					<div class="title-div justify-content-between d-flex">
-						<h4>Mocha</h4>
-						<p class="price float-right">
-							$49
-						</p>
-					</div>
-					<p>
-						Usage of the Internet is becoming more common due to rapid advance.
-					</p>
-				</div>
-			</div>
-			<div class="col-lg-4">
-				<div class="single-menu">
-					<div class="title-div justify-content-between d-flex">
-						<h4>Coffee Latte</h4>
-						<p class="price float-right">
-							$49
-						</p>
-					</div>
-					<p>
-						Usage of the Internet is becoming more common due to rapid advance.
-					</p>
-				</div>
-			</div>
-			<div class="col-lg-4">
-				<div class="single-menu">
-					<div class="title-div justify-content-between d-flex">
-						<h4>Piccolo Latte</h4>
-						<p class="price float-right">
-							$49
-						</p>
-					</div>
-					<p>
-						Usage of the Internet is becoming more common due to rapid advance.
-					</p>
-				</div>
-			</div>
-			<div class="col-lg-4">
-				<div class="single-menu">
-					<div class="title-div justify-content-between d-flex">
-						<h4>Ristretto</h4>
-						<p class="price float-right">
-							$49
-						</p>
-					</div>
-					<p>
-						Usage of the Internet is becoming more common due to rapid advance.
-					</p>
-				</div>
-			</div>
-			<div class="col-lg-4">
-				<div class="single-menu">
-					<div class="title-div justify-content-between d-flex">
-						<h4>Affogato</h4>
-						<p class="price float-right">
-							$49
-						</p>
-					</div>
-					<p>
-						Usage of the Internet is becoming more common due to rapid advance.
-					</p>
-				</div>
-			</div>
+			@endforeach
 		</div>
 	</div>
 </section>
@@ -289,54 +194,4 @@
 </section>
 <!-- End review Area -->
 
-<!-- Start blog Area -->
-<section class="blog-area section-gap" id="blog">
-	<div class="container">
-		<div class="row d-flex justify-content-center">
-			<div class="menu-content pb-60 col-lg-10">
-				<div class="title text-center">
-					<h1 class="mb-10">What kind of Coffee we serve for you</h1>
-					<p>Who are in extremely love with eco friendly system.</p>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-6 col-md-6 single-blog">
-				<img class="img-fluid" src="../assets/img/b1.jpg" alt="">
-				<ul class="post-tags">
-					<li><a href="#">Travel</a></li>
-					<li><a href="#">Life Style</a></li>
-				</ul>
-				<a href="#">
-					<h4>Portable latest Fashion for young women</h4>
-				</a>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-					labore et dolore.
-				</p>
-				<p class="post-date">
-					31st January, 2018
-				</p>
-			</div>
-			<div class="col-lg-6 col-md-6 single-blog">
-				<img class="img-fluid" src="../assets/img/b2.jpg" alt="">
-				<ul class="post-tags">
-					<li><a href="#">Travel</a></li>
-					<li><a href="#">Life Style</a></li>
-				</ul>
-				<a href="#">
-					<h4>Portable latest Fashion for young women</h4>
-				</a>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-					labore et dolore.
-				</p>
-				<p class="post-date">
-					31st January, 2018
-				</p>
-			</div>
-		</div>
-	</div>
-</section>
-<!-- End blog Area -->
 @endsection
