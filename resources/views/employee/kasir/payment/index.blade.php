@@ -5,10 +5,9 @@
         <div class="page-header">
             <h3 class="page-title"> Payments Table </h3>
             <div class="float-left my-2">
-                <form action="#">
+                <form action="{{ route('payment.index') }}">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search . . . " name="search"
-                            value="#">
+                        <input type="text" class="form-control" placeholder="Search . . . " name="search" value="{{ request('search') }}">
                         <button class="btn btn-success" type="submit">Search</button>
                     </div>
                 </form>
@@ -19,7 +18,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="float-right my-2 mb-4">
-                            <a class="btn btn-success" href="#"> Input Menu</a>
+                            <a class="btn btn-success" href="#"> Input Payment</a>
                         </div>
 
                         @if ($message = Session::get('success'))
@@ -36,85 +35,35 @@
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Price</th>
-                                    <th>Stock</th>
-                                    <th>Picture</th>
-                                    <th width="500px">Action</th>
+                                    <th>ID Order</th>
+                                    <th>ID Employee</th>
+                                    <th>Payment</th>
+                                    <th>Change</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
-                            {{--  <tbody>
-                                @foreach ($paginate as $menu)
+                            <tbody>
+                                @foreach ($paginate as $payment)
                                 <tr>
-                                    <td>{{ $menu ->id }}</td>
-                                    <td>{{ $menu ->name }}</td>
-                                    <td>{{ $menu ->price }}</td>
-                                    <td>{{ $menu ->stock }}</td>
-                                    @if ($menu->menu_photo_path != NULL)
-                                    @php
-                                    $img = $menu->menu_photo_path
-                                    @endphp
-                                    @else
-                                    @php
-                                    $img = 'images/default_menu.png'
-                                    @endphp
-                                    @endif
-                                    <td><img class="rounded" width="50px" height="50px"
-                                            src="{{ asset('storage/' . $img)}}" alt="" srcset=""></td>
+                                    <td>{{ $payment ->id }}</td>
+                                    <td>{{ $payment ->employee_id }}</td>
+                                    <td>{{ $payment ->payment }}</td>
+                                    <td>{{ $payment ->change }}</td>
                                     <td>
-                                        <a class="btn btn-info" href="{{ route('menu.show',$menu->id) }}">Show</a>
-                                        <a class="btn btn-primary" href="{{ route('menu.edit',$menu->id) }}">Edit</a>
-                                        <button onclick="show_alert({{$menu->id}})"
-                                            class="btn btn-danger">Delete</button>
-                                        {{-- <a class="btn btn-primary" onclick="confirm_modal_delete()">Delete</a> --}}
+                                        <a class="btn btn-info" href="{{ route('payment.show',$payment->id) }}">Detail</a>
 
                                     </td>
                                 </tr>
-                                {{--  @endforeach  --}}
-                            </tbody>  --}}
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                     <div class="btn">
-                        {{--  {{ $paginate->links('vendor.pagination.bootstrap-4') }}  --}}
+                        {{ $paginate->links('vendor.pagination.bootstrap-4') }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<!-- Modal Popup untuk delete-->
-<div class="modal fade" id="delete_modal">
-    <div class="modal-dialog">
-        <div class="modal-content" style="margin-top:100px;">
-            <div class="modal-header">
-                <h5 class="modal-title" style="text-align:center;">Anda yakin akan meghapus menu?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            </div>
-            <div class="modal-footer" style="margin:0px; border-top:0px; text-align:center;">
-                <form method="POST" id="del">
-                    @csrf
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-                <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Javascript untuk popup modal OK-->
-<script type="text/javascript">
-    var deletedId = 0;
-    function show_alert(id)
-    {
-        $('#delete_modal').modal('show', {backdrop: 'static'});
-        deletedId = id;
-        // alert(deletedId);
-        var action = "/menu/destroy/" + deletedId +"";
-        // alert(action);
-        $('#del').attr("action", action);
-    }
-
-</script>
 @endsection

@@ -14,6 +14,14 @@ class PaymentController extends Controller
      */
     public function index()
     {
+        if (request('search')) {
+            $paginate = Payment::where('id', 'like', '%'.request('search').'%')
+                    ->orwhere('employee_id', 'like', '%'.request('search').'%')
+                    ->orwhere('payment', 'like', '%'.request('search').'%')
+                    ->orwhere('change', 'like', '%'.request('search').'%')
+                    ->paginate(5);
+            return view('employee.kasir.payment.index', ['paginate'=>$paginate]);
+        }
         $payment = Payment::all();
         $paginate = Payment::orderBy('id', 'asc')->paginate(5);
         return view('employee.kasir.payment.index', ['payment'=>$payment,'paginate'=>$paginate]);
