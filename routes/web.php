@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\MenuController;
-use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,69 +17,58 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+// Route::get('/', function () {
+//     return view('index');
+// });
 
-// Route::get('/home', [HomeController::class, 'index']);
-// route for guest
-Route::group(['middleware' => ['guest']], function() {
-    Route::get('/all-menus', function() {
-        return view('user.menus');
-    });
-});
+Route::get('/menu', [MenuController::class, 'index']);
+Route::post('menu/destroy/{id}', [MenuController::class, 'destroy']);
+Route::resource('menu', MenuController::class);
+
+Route::get('/payment', [PaymentController::class, 'index']);
+Route::resource('payment', PaymentController::class);
 
 Auth::routes(['verify' => true]);
-
-Route::get('logout', [LoginController::class, 'logout']);
-
-// route for buyer
-Route::group(['middleware' => ['auth', 'role:buyer']], function() {
-    Route::get('/order', function() {
-        return view('user.order');
-    })->middleware('verified'); // email must verified before accesing this route or page
-});
+Route::view('/order', 'order')->middleware('verified'); // email must verified before accesing this route or page
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 // routes for employee
-Route::group(['middleware' => ['auth', 'role:employee']], function() {
-    Route::prefix('employee')->group( function () {
-        Route::get('/', function () {
-            return view('indexAdm');
-        });
-        Route::get('/ui-features/buttons', function () {
-            return view('employee.ui-features.buttons');
-        });
-        Route::get('/ui-features/typography', function () {
-            return view('employee.ui-features.typography');
-        });
-        Route::get('/icons/mdi', function () {
-            return view('employee.icons.mdi');
-        });
-        Route::get('/forms/basic_elements', function () {
-            return view('employee.forms.basic_elements');
-        });
-        Route::get('/charts/chartjs', function () {
-            return view('employee.charts.chartjs');
-        }); 
-        Route::get('/tables/basic-table', function () {
-            return view('employee.tables.basic-table');
-        }); 
-        Route::get('/samples/blank-page', function () {
-            return view('employee.samples.blank-page');
-        }); 
-        Route::get('/samples/login', function () {
-            return view('employee.samples.login');
-        }); 
-        Route::get('/samples/register', function () {
-            return view('employee.samples.register');
-        }); 
-        Route::get('/samples/error-500', function () {
-            return view('employee.samples.error-500');
-        }); 
-        Route::get('/samples/error-404', function () {
-            return view('employee.samples.error-404');
-        }); 
+Route::prefix('employee')->group( function () {
+    Route::get('/', function () {
+        return view('dashboard');
     });
-
-    // route for menu
-    Route::resource('menu', MenuController::class);
+    Route::get('/ui-features/buttons', function () {
+        return view('employee.ui-features.buttons');
+    });
+    Route::get('/ui-features/typography', function () {
+        return view('employee.ui-features.typography');
+    });
+    Route::get('/icons/mdi', function () {
+        return view('employee.icons.mdi');
+    });
+    Route::get('/forms/basic_elements', function () {
+        return view('employee.forms.basic_elements');
+    });
+    Route::get('/charts/chartjs', function () {
+        return view('employee.charts.chartjs');
+    }); 
+    Route::get('/tables/basic-table', function () {
+        return view('employee.tables.basic-table');
+    }); 
+    Route::get('/samples/blank-page', function () {
+        return view('employee.samples.blank-page');
+    }); 
+    Route::get('/samples/login', function () {
+        return view('employee.samples.login');
+    }); 
+    Route::get('/samples/register', function () {
+        return view('employee.samples.register');
+    }); 
+    Route::get('/samples/error-500', function () {
+        return view('employee.samples.error-500');
+    }); 
+    Route::get('/samples/error-404', function () {
+        return view('employee.samples.error-404');
+    }); 
 });
