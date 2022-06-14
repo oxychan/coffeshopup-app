@@ -10,7 +10,7 @@
 					Start your day with <br>
 					a black Coffee
 				</h1>
-				<a href="#" class="primary-btn text-uppercase">Buy Now</a>
+				<a href="{{ route('user.menus') }}" class="primary-btn text-uppercase">Buy Now</a>
 			</div>
 		</div>
 	</div>
@@ -55,7 +55,7 @@
 		</div>
 		<div class="row jsutify-content-end">
 			<div class="col-md-12 mb-3 d-flex justify-content-end">
-				<a href="/all-menus" class="primary-btn text-uppercase">Show More</a>
+				<a href="{{ route('user.menus') }}" class="primary-btn text-uppercase">Show More</a>
 			</div>
 		</div>
 		<div class="row">

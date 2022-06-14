@@ -19,13 +19,9 @@ use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', [HomeController::class, 'index']);
 
-// Route::get('/home', [HomeController::class, 'index']);
-// route for guest
-Route::group(['middleware' => ['guest']], function() {
-    Route::get('/all-menus', function() {
-        return view('user.menus');
-    });
-});
+Route::get('/all-menus', function() {
+    return view('user.menus');
+})->name('user.menus')->withoutMiddleware(['role:admin', 'role:employee']);
 
 Auth::routes(['verify' => true]);
 
@@ -43,7 +39,7 @@ Route::group(['middleware' => ['auth', 'role:buyer']], function() {
 Route::group(['middleware' => ['auth', 'role:employee']], function() {
     Route::prefix('employee')->group( function () {
         Route::get('/', function () {
-            return view('indexAdm');
+            return view('employee.staff-dapur.dashboard');
         });
         Route::get('/ui-features/buttons', function () {
             return view('employee.ui-features.buttons');
