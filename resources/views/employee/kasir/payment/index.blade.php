@@ -18,7 +18,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="float-right my-2 mb-4">
-                            <a class="btn btn-success" href="#"> Input Payment</a>
+                            <a class="btn btn-success" href="{{ route('payment.create') }}"> Input Payment</a>
                         </div>
 
                         @if ($message = Session::get('success'))

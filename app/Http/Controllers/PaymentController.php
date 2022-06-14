@@ -19,6 +19,7 @@ class PaymentController extends Controller
         if (request('search')) {
             $paginate = Payment::where('id', 'like', '%'.request('search').'%')
                     ->orwhere('employee_id', 'like', '%'.request('search').'%')
+                    ->orwhere('order_id', 'like', '%'.request('search').'%')
                     ->orwhere('payment', 'like', '%'.request('search').'%')
                     ->orwhere('change', 'like', '%'.request('search').'%')
                     ->paginate(5);
@@ -37,7 +38,8 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        //
+        $order = Order::all();
+        return view('employee.kasir.payment.create', ['order'=>$order]);
     }
 
     /**
@@ -48,7 +50,26 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'employee_id' => 'required',
+            'order' => 'required',
+            'payment' => 'required',
+            'change' => 'required',
+        ]);
+        
+        $payment = new Payment;
+        $payment->employee_id = $request->get('employee_id');
+        $payment->payment = $request->get('payment'); 
+        $payment->change = $request->get('change');
+
+        $order = new Order;
+        $order->id = $request->get('order');
+        
+        $payment->order()->associate($order);
+        $payment->save();
+        
+        return redirect()->route('payment.index')
+        ->with('success', 'Payment Added Successfully');
     }
 
     /**
