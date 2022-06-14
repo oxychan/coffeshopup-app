@@ -16,15 +16,16 @@ use App\Http\Controllers\MenuController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 
-Route::get('/menu', [MenuController::class, 'index']);
+Route::get('/', [MenuController::class, 'index']);
 
 Route::post('menu/destroy/{id}', [MenuController::class, 'destroy']);
 
 Route::resource('menu', MenuController::class);
+
 Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

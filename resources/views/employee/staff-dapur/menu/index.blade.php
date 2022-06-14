@@ -93,8 +93,6 @@
             <div class="modal-footer" style="margin:0px; border-top:0px; text-align:center;">
                 <form method="POST" id="del">
                     @csrf
-                    
-
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
                 <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Cancel</button>
