@@ -79,7 +79,13 @@ Route::group(['middleware' => ['auth', 'role:employee']], function() {
 
     // route for menu
     Route::resource('menu', MenuController::class);
+    Route::get('/staff-dapur/dashboard', function () {
+            return view('employee.staff-dapur.dashboard');
+        });
 
     //route for payment
     Route::resource('payment', PaymentController::class);
+    Route::get('/kasir/dashboard', function () {
+            return view('employee.kasir.dashboard');
+        });
 });
