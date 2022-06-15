@@ -11,6 +11,17 @@
                     </div>
                     <div class="card-body">
                         <table class="table table-striped table-hover">
+                            @foreach ($payment->order->orderDetail as $orderDetail)
+                            <tr>
+                                <th>Nama menu</th>
+                                <td>{{ $orderDetail->menu->name }}</td>
+                            </tr>
+                            <tr>
+                                <th>QTY</th>
+                                <td>{{ $orderDetail->qty }}</td>
+                            </tr>
+                            @endforeach
+                            
                             <tr>
                                 <th>ID Payment</th>
                                 <td>{{$payment->id}}</td>
@@ -21,7 +32,7 @@
                             </tr>
                             <tr>
                                 <th>ID User</th>
-                                <td>{{$payment->order->user_id}}</td>
+                                <td>{{$payment->order->user->email}}</td>
                             </tr>
                             <tr>
                                 <th>Total</th>
