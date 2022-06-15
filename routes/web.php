@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
-use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Auth\LoginController;
 
 /*
@@ -18,16 +17,18 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 
-//main route
 Route::get('/', [HomeController::class, 'index']);
+
 Route::get('/all-menus', function() {
     return view('user.menus');
 })->name('user.menus')->withoutMiddleware(['role:admin', 'role:employee']);
 
+Route::get('/all-menus/beverages', [MenuController::class, 'getBeverageData']);
 
+Route::get('/all-menus/foods', [MenuController::class, 'getFoodData']);
 
-// auth route
 Auth::routes(['verify' => true]);
+
 Route::get('logout', [LoginController::class, 'logout']);
 
 // route for buyer
@@ -35,13 +36,8 @@ Route::group(['middleware' => ['auth', 'role:buyer']], function() {
     Route::get('/order', function() {
         return view('user.order');
     })->middleware('verified'); // email must verified before accesing this route or page
-    Route::get('/chart', function() {
-        return view('user.chart');
-    })->middleware('verified');
-    Route::get('/order-fe', function() {
-        return view('user.order-fe');
-    })->middleware('verified');
 });
+
 
 // routes for employee
 Route::group(['middleware' => ['auth', 'role:employee']], function() {
@@ -84,15 +80,6 @@ Route::group(['middleware' => ['auth', 'role:employee']], function() {
         }); 
     });
 
-// route for staff-dapur
+    // route for menu
     Route::resource('menu', MenuController::class);
-    Route::get('/staff-dapur/dashboard', function () {
-            return view('employee.staff-dapur.dashboard');
-        });
-
-//route for payment
-    Route::resource('payment', PaymentController::class);
-    Route::get('/kasir/dashboard', function () {
-            return view('employee.kasir.dashboard');
-        });
 });

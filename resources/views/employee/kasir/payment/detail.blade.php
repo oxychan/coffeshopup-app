@@ -11,17 +11,6 @@
                     </div>
                     <div class="card-body">
                         <table class="table table-striped table-hover">
-                            @foreach ($payment->order->orderDetail as $orderDetail)
-                            <tr>
-                                <th>Nama menu</th>
-                                <td>{{ $orderDetail->menu->name }}</td>
-                            </tr>
-                            <tr>
-                                <th>QTY</th>
-                                <td>{{ $orderDetail->qty }}</td>
-                            </tr>
-                            @endforeach
-                            
                             <tr>
                                 <th>ID Payment</th>
                                 <td>{{$payment->id}}</td>
@@ -31,9 +20,19 @@
                                 <td>{{$payment->employee_id}}</td>
                             </tr>
                             <tr>
-                                <th>ID User</th>
+                                <th>Email User</th>
                                 <td>{{$payment->order->user->email}}</td>
                             </tr>
+                            <tr>
+                                <th>Nama menu</th>
+                                <th>QTY</th>
+                            </tr>
+                            @foreach ($payment->order->orderDetail as $orderDetail)
+                            <tr>
+                                <td>{{ $orderDetail->menu->name }}</td>
+                                <td>{{ $orderDetail->qty }}</td>
+                            </tr>
+                            @endforeach
                             <tr>
                                 <th>Total</th>
                                 <td>{{$payment->order->total}}</td>
