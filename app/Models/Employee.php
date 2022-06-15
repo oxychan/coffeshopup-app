@@ -19,4 +19,12 @@ class Employee extends Model
         'phone',
         'sex',
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function payment() {
+        return $this->hasMany(Payment::class);
+    }
 }
