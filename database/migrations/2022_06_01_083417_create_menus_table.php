@@ -18,6 +18,7 @@ class CreateMenusTable extends Migration
             $table->string('name', 50);
             $table->integer('price');
             $table->integer('stock');
+            $table->string('type');
             $table->string('menu_photo_path', 255)->nullable();
             $table->timestamps();
         });

@@ -32,6 +32,7 @@
         <!-- page-body-wrapper ends -->
         @include('layouts.partials.footer')
     </div>
+
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
@@ -49,6 +50,8 @@
     <script src="../../assets/js/dashboard.js"></script>
     <script src="../../assets/js/todolist.js"></script>
     <!-- End custom js for this page -->
+
+    
 </body>
 
 </html>
