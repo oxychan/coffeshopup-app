@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -14,7 +16,17 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        $payment = Payment::all();
+        if (request('search')) {
+            $paginate = Payment::where('id', 'like', '%'.request('search').'%')
+                    ->orwhere('employee_id', 'like', '%'.request('search').'%')
+                    ->orwhere('order_id', 'like', '%'.request('search').'%')
+                    ->orwhere('payment', 'like', '%'.request('search').'%')
+                    ->orwhere('change', 'like', '%'.request('search').'%')
+                    ->paginate(5);
+            return view('employee.kasir.payment.index', ['paginate'=>$paginate]);
+        }
+        $payment = Payment::with('order')->get();
+        // $order = Order::with('orderDetail')->get();
         $paginate = Payment::orderBy('id', 'asc')->paginate(5);
         return view('employee.kasir.payment.index', ['payment'=>$payment,'paginate'=>$paginate]);
     }
@@ -26,7 +38,8 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        //
+        $order = Order::all();
+        return view('employee.kasir.payment.create', ['order'=>$order]);
     }
 
     /**
@@ -37,7 +50,26 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'employee_id' => 'required',
+            'order' => 'required',
+            'payment' => 'required',
+            'change' => 'required',
+        ]);
+        
+        $payment = new Payment;
+        $payment->employee_id = $request->get('employee_id');
+        $payment->payment = $request->get('payment'); 
+        $payment->change = $request->get('change');
+
+        $order = new Order;
+        $order->id = $request->get('order');
+        
+        $payment->order()->associate($order);
+        $payment->save();
+        
+        return redirect()->route('payment.index')
+        ->with('success', 'Payment Added Successfully');
     }
 
     /**
@@ -48,7 +80,8 @@ class PaymentController extends Controller
      */
     public function show($id)
     {
-        //
+        $payment = Payment::where('id', $id)->first();
+        return view('employee.kasir.payment.detail', compact('payment'));
     }
 
     /**
