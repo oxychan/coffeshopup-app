@@ -146,4 +146,48 @@ class MenuController extends Controller
         ->with('success', 'Menu Deleted Successfully'); 
     }
 
+    public function getBeverageData(Request $request)
+    {
+        if( $request->ajax() ) 
+        {
+            if ($request->get('query') != '') {
+                $menus = Menu::where('type', 'beverage')
+                    ->where('name', 'like', '%' . $request->get('query') .'%')
+                    ->orWhere('type', 'like', '%' . $request->get('query') . '%')
+                    ->get();
+                return response()->json([
+                    'menus'=>$menus,
+                ]);
+            } else {
+                $menus = Menu::where('type', 'beverage')->get();
+                return response()->json([
+                    'menus'=>$menus,
+                ]);
+            }
+
+        } 
+       
+    }
+
+    public function getFoodData(Request $request)
+    {
+        if( $request->ajax() )
+        {
+            if ($request->get('query') != '') {
+                $menus = Menu::where('type', 'food')
+                    ->where('name', 'like', '%' . $request->get('query') .'%')
+                    ->orWhere('type', 'like', '%' . $request->get('query') . '%')
+                    ->get();
+                return response()->json([
+                    'menus'=>$menus,
+                ]);
+            } else {
+                $menus = Menu::where('type', 'food')->get();
+                return response()->json([
+                    'menus'=>$menus,
+                ]);
+            }
+        }
+    }
+
 }

@@ -23,6 +23,10 @@ Route::get('/all-menus', function() {
     return view('user.menus');
 })->name('user.menus')->withoutMiddleware(['role:admin', 'role:employee']);
 
+Route::get('/all-menus/beverages', [MenuController::class, 'getBeverageData']);
+
+Route::get('/all-menus/foods', [MenuController::class, 'getFoodData']);
+
 Auth::routes(['verify' => true]);
 
 Route::get('logout', [LoginController::class, 'logout']);
