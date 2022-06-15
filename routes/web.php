@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth', 'role:buyer']], function() {
     Route::get('/chart', function() {
         return view('user.chart');
     })->middleware('verified');
-    Route::get('/order', function() {
+    Route::get('/order-fe', function() {
         return view('user.order-fe');
     })->middleware('verified');
 });
