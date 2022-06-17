@@ -51,6 +51,7 @@
                                     <td>{{ $payment ->change }}</td>
                                     <td>
                                         <a class="btn btn-info" href="{{ route('payment.show',$payment->id) }}">Detail</a>
+                                        <a class="btn btn-primary" href="{{ route('print_payment',$payment->id) }}">Print</a>
 
                                     </td>
                                 </tr>

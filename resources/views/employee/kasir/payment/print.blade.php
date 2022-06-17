@@ -1,12 +1,15 @@
 @extends('layouts.paymentLayout')
 @section('container')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-print-css/css/bootstrap-print.min.css"
+    media="print">
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-header">
-                        <a style="text-decoration: none;" class="text-dark" href="{{ route('payment.index') }}">Payment / </a>
+                        <a style="text-decoration: none;" class="text-dark" href="{{ route('payment.index') }}">Payment
+                            / </a>
                         <a style="text-decoration: none;" class="text-dark font-weight-bold" href="#">Detail Payment</a>
                     </div>
                     <div class="card-body">
@@ -40,7 +43,7 @@
                             <tr>
                                 <td>{{ $orderDetail->menu->name }}</td>
                                 <td>{{ $orderDetail->qty }}</td>
-                                <td>{{ 
+                                <td>{{
                                     $orderDetail->menu->price * $orderDetail->qty
                                     }}</td>
                             </tr>
@@ -61,9 +64,6 @@
                                 <td>{{$payment->change}}</td>
                             </tr>
                         </table>
-                        <div class="d-flex">
-                            <a class="btn btn-success mt-3" href="{{ route('payment.index') }}">Kembali</a>
-                        </div>
                     </div>
                 </div>
             </div>

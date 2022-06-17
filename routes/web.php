@@ -56,41 +56,42 @@ Route::group(['middleware' => ['auth', 'role:staff-dapur']], function() {
 Route::group(['middleware' => ['auth', 'role:kasir']], function() {
     Route::prefix('employee')->group( function () {
         Route::resource('/kasir/payment', PaymentController::class);
+        Route::get('/kasir/payment/print/{id}', [PaymentController::class, 'print'])->name('print_payment');
         Route::get('/kasir', function () {
             return view('employee.kasir.dashboardDummy'); 
         });
         Route::get('/ui-features/buttons', function () {
-            return view('employee.ui-features.buttons');
+            return view('layouts.partials.ui-features.buttons');
         });
         Route::get('/ui-features/typography', function () {
-            return view('employee.ui-features.typography');
+            return view('layouts.partials.ui-features.typography');
         });
         Route::get('/icons/mdi', function () {
-            return view('employee.icons.mdi');
+            return view('layouts.partials.icons.mdi');
         });
         Route::get('/forms/basic_elements', function () {
-            return view('employee.forms.basic_elements');
+            return view('layouts.partials.forms.basic_elements');
         });
         Route::get('/charts/chartjs', function () {
-            return view('employee.charts.chartjs');
+            return view('layouts.partials.charts.chartjs');
         }); 
         Route::get('/tables/basic-table', function () {
-            return view('employee.tables.basic-table');
+            return view('layouts.partials.tables.basic-table');
         }); 
         Route::get('/samples/blank-page', function () {
-            return view('employee.samples.blank-page');
+            return view('layouts.partials.samples.blank-page');
         }); 
         Route::get('/samples/login', function () {
-            return view('employee.samples.login');
+            return view('layouts.partials.samples.login');
         }); 
         Route::get('/samples/register', function () {
-            return view('employee.samples.register');
+            return view('layouts.partials.samples.register');
         }); 
         Route::get('/samples/error-500', function () {
-            return view('employee.samples.error-500');
+            return view('layouts.partials.samples.error-500');
         }); 
         Route::get('/samples/error-404', function () {
-            return view('employee.samples.error-404');
+            return view('layouts.partials.samples.error-404');
         }); 
     });
     
