@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\Auth\LoginController;
 
 /*
@@ -43,21 +44,34 @@ Route::group(['middleware' => ['auth', 'role:buyer']], function() {
 // routes for employee:staff-dapur
 Route::group(['middleware' => ['auth', 'role:staff-dapur']], function() {
     Route::prefix('employee')->group( function () {
-        Route::get('/staff-dapur', function () {
-            return view('employee.staff-dapur.dashboardDummy');
-        });
+        Route::get('/staff-dapur', [MenuController::class, 'index']);
         
         // route for menu
-        Route::resource('menu', MenuController::class);
+        Route::resource('/staff-dapur/menu', MenuController::class);
     });
 });
+
+// routes for employee:admin
+Route::group(['middleware' => ['auth', 'role:admin']], function() {
+    Route::prefix('admin')->group( function () {
+        Route::get('/', [EmployeeController::class, 'index']);
+        Route::get('/employee', [EmployeeController::class, 'index']);
+        
+        // route for employee
+        Route::resource('employee', EmployeeController::class);
+    });
+});
+
 
 // routes for employee:kasir
 Route::group(['middleware' => ['auth', 'role:kasir']], function() {
     Route::prefix('employee')->group( function () {
+        Route::get('/kasir', [PaymentController::class, 'index']);
+
+        // route for payment
         Route::resource('/kasir/payment', PaymentController::class);
         Route::get('/kasir/payment/print/{id}', [PaymentController::class, 'print'])->name('print_payment');
-        Route::get('/kasir', [PaymentController::class, 'index']);
+        
         Route::get('/ui-features/buttons', function () {
             return view('layouts.partials.ui-features.buttons');
         });
