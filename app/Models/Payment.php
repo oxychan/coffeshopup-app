@@ -18,4 +18,9 @@ class Payment extends Model
         'payment',
         'change',
     ];
+
+    public function order(){
+        return $this->belongsTo(Order::class);
+    }
+
 }
