@@ -27,6 +27,7 @@ class MenuSeeder extends Seeder
     			'name' => $faker->foodName().' '.$faker->sauceName(),
     			'price' => 1000 * $faker->numberBetween(10, 200),
     			'stock' => $faker->numberBetween(25,50),
+				'type' => 'food',
     			'menu_photo_path' => 'images/'.'food_img'.$i.'.png'
     		]);
     	}
@@ -35,6 +36,7 @@ class MenuSeeder extends Seeder
     			'name' => $faker->beverageName().' '.$faker->fruitName(),
     			'price' => 1000 * $faker->numberBetween(10, 200),
     			'stock' => $faker->numberBetween(25,50),
+				'type' => 'beverage',
     			'menu_photo_path' => 'images/'.'beverage_img'.$i.'.png'
     		]);
     	}
