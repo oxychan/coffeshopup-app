@@ -39,23 +39,11 @@ Route::group(['middleware' => ['auth', 'role:buyer']], function() {
 });
 
 
-// routes for employee:staff-dapur
-Route::group(['middleware' => ['auth', 'role:staff-dapur']], function() {
+// routes for employee
+Route::group(['middleware' => ['auth', 'role:employee']], function() {
     Route::prefix('employee')->group( function () {
-        Route::get('/staff-dapur', function () {
-            return view('employee.staff-dapur.dashboardDummy');
-        });
-        
-        // route for menu
-        Route::resource('menu', MenuController::class);
-    });
-});
-
-// routes for employee:kasir
-Route::group(['middleware' => ['auth', 'role:kasir']], function() {
-    Route::prefix('employee')->group( function () {
-        Route::get('/kasir', function () {
-            return view('employee.kasir.dashboardDummy'); 
+        Route::get('/', function () {
+            return view('employee.staff-dapur.dashboard');
         });
         Route::get('/ui-features/buttons', function () {
             return view('employee.ui-features.buttons');
@@ -91,5 +79,7 @@ Route::group(['middleware' => ['auth', 'role:kasir']], function() {
             return view('employee.samples.error-404');
         }); 
     });
-    
+
+    // route for menu
+    Route::resource('menu', MenuController::class);
 });
