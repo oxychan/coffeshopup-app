@@ -42,8 +42,10 @@ class LoginController extends Controller
         
         if(auth()->user()->role->role_name == 'admin') {
             return '/admin';
-        } else if (auth()->user()->role->role_name == 'employee') {
-            return '/employee';
+        } else if (auth()->user()->role->role_name == 'kasir') {
+            return '/employee/kasir';
+        } else if(auth()->user()->role->role_name == 'staff-dapur') {
+            return '/employee/staff-dapur';
         } else {
             return '/';
         }

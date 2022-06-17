@@ -20,9 +20,19 @@
                                 <td>{{$payment->employee_id}}</td>
                             </tr>
                             <tr>
-                                <th>ID User</th>
-                                <td>{{$payment->order->user_id}}</td>
+                                <th>Email User</th>
+                                <td>{{$payment->order->user->email}}</td>
                             </tr>
+                            <tr>
+                                <th>Nama menu</th>
+                                <th>QTY</th>
+                            </tr>
+                            @foreach ($payment->order->orderDetail as $orderDetail)
+                            <tr>
+                                <td>{{ $orderDetail->menu->name }}</td>
+                                <td>{{ $orderDetail->qty }}</td>
+                            </tr>
+                            @endforeach
                             <tr>
                                 <th>Total</th>
                                 <td>{{$payment->order->total}}</td>

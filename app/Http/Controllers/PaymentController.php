@@ -80,7 +80,10 @@ class PaymentController extends Controller
      */
     public function show($id)
     {
-        $payment = Payment::where('id', $id)->first();
+        $payment = Payment::with('order')->where('id', $id)->first();
+        // $orders = $payment->order->orderDetail;
+        // dd($orders);
+
         return view('employee.kasir.payment.detail', compact('payment'));
     }
 

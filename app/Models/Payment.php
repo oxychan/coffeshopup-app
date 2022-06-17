@@ -22,4 +22,5 @@ class Payment extends Model
     public function order(){
         return $this->belongsTo(Order::class);
     }
+
 }

@@ -18,4 +18,8 @@ class Menu extends Model
         'stock',
         'menu_photo_path',
     ];
+
+    public function orderDetails() {
+        return $this->hasMany(OrderDetial::class);
+    }
 }

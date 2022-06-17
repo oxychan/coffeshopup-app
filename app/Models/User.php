@@ -12,7 +12,8 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-
+    protected $table = 'users';
+    protected $primaryKey = 'id';
     /**
      * The attributes that are mass assignable.
      *
@@ -46,5 +47,13 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function role() {
         return $this->belongsTo(Role::class);
+    }
+
+    public function order() {
+        return $this->hasMany(Order::class);
+    }
+    
+    public function employee() {
+        return $this->hasOne(Employee::class);
     }
 }
