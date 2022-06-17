@@ -57,9 +57,7 @@ Route::group(['middleware' => ['auth', 'role:kasir']], function() {
     Route::prefix('employee')->group( function () {
         Route::resource('/kasir/payment', PaymentController::class);
         Route::get('/kasir/payment/print/{id}', [PaymentController::class, 'print'])->name('print_payment');
-        Route::get('/kasir', function () {
-            return view('employee.kasir.dashboardDummy'); 
-        });
+        Route::get('/kasir', [PaymentController::class, 'index']);
         Route::get('/ui-features/buttons', function () {
             return view('layouts.partials.ui-features.buttons');
         });

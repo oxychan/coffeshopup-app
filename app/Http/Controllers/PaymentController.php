@@ -125,6 +125,7 @@ class PaymentController extends Controller
     public function print($id)
     {
         $payment = Payment::with('order')->where('id', $id)->first();
+        
         $pdf = PDF::loadview('employee.kasir.payment.print', ['payment' => $payment]);
         return $pdf->stream();
     }
