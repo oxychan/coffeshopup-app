@@ -19,13 +19,13 @@ use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/all-menus', function() {
-    return view('user.menus');
-})->name('user.menus')->withoutMiddleware(['role:admin', 'role:employee']);
+Route::get('/all-menus', [MenuController::class, 'allMenus'])->name('user.menus')->withoutMiddleware(['role:admin', 'role:employee']);
 
 Route::get('/all-menus/beverages', [MenuController::class, 'getBeverageData']);
 
 Route::get('/all-menus/foods', [MenuController::class, 'getFoodData']);
+
+Route::get('/menu/show/{id}', [MenuController::class, 'getMenu']);
 
 Auth::routes(['verify' => true]);
 

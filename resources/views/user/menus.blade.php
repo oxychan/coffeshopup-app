@@ -1,4 +1,4 @@
-@extends('layouts.masterLayout')
+@extends('layouts.allMenuLayout')
 
 @section('container')
 <div class="d-flex" style="height: 74px; background-color: rgba(20, 2, 0, 0.8);"></div>
@@ -28,100 +28,126 @@
 		</ul>
 		<div class="tab-content" id="pills-tabContent">
 			<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-				<div class="row all-menus" id="beverage-menus">
-
+				<div id="paginate_data">
+					@include('user.beverage-paginate')
 				</div>
 			</div>
 			<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-				<div class="row all-menus" id="food-menus">
-
+				<div id="food-menus">
+					@include('user.food-paginate')
 				</div>
 			</div>
 			
 		</div>
-		<div class="row" id="menu">
-				
-		</div>
 	</div>
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Order</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+		
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 
 @section('scripts')
 	<script>
 		$(document).ready( function() {
-			getBeverageData();
-			getFoodData();
+			// getBeverageData();
+			// getFoodData();
 
-			function getBeverageData(query = '') {
+			function getBeverageData(query = '', page) {
 				$.ajax({
 					type: "GET",
-					url: "/all-menus/beverages",
+					url: "/all-menus/beverages?page=" + page,
 					data: {query:query},
-					dataType: "json",
 					success: function(data) {					
-						$('#beverage-menus').html('');	
-						$.each(data.menus, function (key, menu) {
-							$('#beverage-menus').append(
-								'<div class="col-sm-4" id="menu" >\
-									<div class="single-menu">\
-										<div class="row">\
-											<div class="col-md-6">\
-												<img src="' + menu.menu_photo_path + '" alt="menu" width="150px" height="150px">\
-											</div>\
-											<div class="col-md-6">\
-												<h4>'+ menu.name + '</h4>\
-												<hr>\
-												<span><strong>Stock : </strong>' + menu.stock +' </span><br>\
-												<span><strong>Rp.' + menu.price + '</strong></span>\
-											</div>\
-										</div>\
-									</div>\
-								</div>'
-							);
-						});							
+						$('#paginate_data').html('');	
+						$('#paginate_data').html(data);
 					}
 				});
 			}
 
-			function getFoodData(query = '') {
+			function getFoodData(query = '', page) {
 				$.ajax({
 					type: "GET",
-					url: "/all-menus/foods",
-					dataType: "json",
+					url: "/all-menus/foods?page=" + page,
 					data: {query: query},
 					success: function(data) {
-						$('#food-menus').html('');	
-						$.each(data.menus, function(key, menu) {
-							$('#food-menus').append(
-								'<div class="col-sm-4" id="menu" >\
-									<div class="single-menu">\
-										<div class="row">\
-											<div class="col-md-6">\
-												<img src="' + menu.menu_photo_path + '" alt="menu" width="150px" height="150px">\
-											</div>\
-											<div class="col-md-6">\
-												<h4>'+ menu.name + '</h4>\
-												<hr>\
-												<span><strong>Stock : </strong>' + menu.stock +' </span><br>\
-												<span><strong>Rp.' + menu.price + '</strong></span>\
-											</div>\
-										</div>\
-									</div>\
-								</div>'
-							);
-						});
+						$('#food-menus').html('');
+						$('#food-menus').html(data);	
 					}
 				});
 			}
 
 			$(document).on('keyup', '#search', function() {
-				var query = $(this).val();
+				var query = $(this).val();				
+				
 				if ($('#pills-home-tab').hasClass('active')) {
-					getBeverageData(query);
+					var page = $('#hidden_page_beverage').val();
+					getBeverageData(query, page);
 				} else {
-					getFoodData(query);
+					var page = $('#hidden_page_food').val();
+					getFoodData(query, page);
 				}
 			});
+
+			function convertIDR(number) {
+				return number.toLocaleString('id-ID', { 
+					style: 'currency', 
+					currency: 'IDR' 
+				});
+			}
+
+			$(document).on('click', '.pagination a', function(event) {
+				event.preventDefault();
+				var page = $(this).attr('href').split('page=')[1];
+				var query = $('#query').val();
+				
+
+				if ($('#pills-home-tab').hasClass('active')) {
+					$('#hidden_page_beverage').val = page;
+					getBeverageData(query, page);
+				} else {
+					$('#hidden_page_food').val = page;
+					getFoodData(query, page);
+				}
+				                                                            
+			}) ;
+
+			function showModalMenu(id) {
+				$.ajax({
+					type: 'GET',
+					url: '/menu/show/'+id,
+					success: function(data) {
+						$('.modal-body').html('');
+						$('.modal-body').append(
+							'<img src="/storage/' + data.menu.menu_photo_path + '" alt="menu" width="150px" heigh="150px"><br>\
+							<strong>'+ data.menu.name + '</strong>\
+							<p>Stock ' + data.menu.stock + '</p>\
+							<input type="number" name="qty" id="qty">\
+							<input type="button" value="Add to cart" class="btn btn-warning">'
+						);
+
+						$('#staticBackdrop').modal('show');
+						
+					}
+				});
+			}
+
+			$(document).on('click', '.menu', function() {
+				var data = $(this).data('menuid');
+				showModalMenu(data);				
+			}); 
+			
 		} );
 
 	</script>
