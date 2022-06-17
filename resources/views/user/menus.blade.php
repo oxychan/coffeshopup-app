@@ -119,9 +119,8 @@
 				} else {
 					$('#hidden_page_food').val = page;
 					getFoodData(query, page);
-				}
-				                                                            
-			}) ;
+				}				                                                            
+			});
 
 			function showModalMenu(id) {
 				$.ajax({
