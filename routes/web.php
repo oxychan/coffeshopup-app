@@ -40,12 +40,12 @@ Route::group(['middleware' => ['auth', 'role:buyer']], function() {
     Route::get('/order', function() {
         return view('user.order');
     })->middleware('verified'); // email must verified before accesing this route or page
-    Route::get('/profile', function() {
+    Route::get('/user/profile', function() {
         return view('user.profile');
     })->middleware('verified')->name('user.profile'); // email must verified before accesing this route or page
-    Route::get('/edit_profile', function() {
-        return view('user.edit_profile');
-    })->middleware('verified')->name('user.edit_profile'); // email must verified before accesing this route or page
+    Route::get('/user/edit_password/{id}', [UserController::class, 'edit_password'])->name('user.edit_password'); // email must verified before accesing this route or page
+    Route::get('/user/update_password/{id}', [UserController::class, 'update_password'])->name('user.update_password'); // email must verified before accesing this route or page
+    
 
     // route for user
         Route::resource('user', UserController::class)->middleware('verified');

@@ -52,7 +52,7 @@
                     Edit profile
                 </button>
             </a>
-            <a href="#">
+            <a href="{{ route('user.edit_password', auth()->user()->id) }}">
                 <button class="btn text-white" style="background-color: rgb(20, 2, 0)">
                     Change password
                 </button>
