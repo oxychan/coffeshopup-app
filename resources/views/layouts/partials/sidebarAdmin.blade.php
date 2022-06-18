@@ -28,7 +28,7 @@
     </li>
     <li class="nav-item">
       <a class="nav-link" href="{{ route('report.index') }}">
-        <span class="menu-title">Payment Reports</span>
+        <span class="menu-title">Sales Report</span>
         <i class="mdi mdi-table-large menu-icon"></i>
       </a>
     </li>

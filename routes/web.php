@@ -7,6 +7,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 
 /*
@@ -20,7 +21,7 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::get('/all-menus', function() {
     return view('user.menus');
@@ -39,6 +40,15 @@ Route::group(['middleware' => ['auth', 'role:buyer']], function() {
     Route::get('/order', function() {
         return view('user.order');
     })->middleware('verified'); // email must verified before accesing this route or page
+    Route::get('/profile', function() {
+        return view('user.profile');
+    })->middleware('verified')->name('user.profile'); // email must verified before accesing this route or page
+    Route::get('/edit_profile', function() {
+        return view('user.edit_profile');
+    })->middleware('verified')->name('user.edit_profile'); // email must verified before accesing this route or page
+
+    // route for user
+        Route::resource('user', UserController::class)->middleware('verified');
 });
 
 
