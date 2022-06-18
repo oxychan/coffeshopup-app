@@ -29,8 +29,8 @@
                                 <tr>
                                     <th>Employee Id</th>
                                     <th>User Id</th>
+                                    <th>Role</th>
                                     <th>Name</th>
-                                    <th>Email</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -39,8 +39,8 @@
                                 <tr>
                                     <td>{{ $employee ->id }}</td>
                                     <td>{{ $employee ->user_id }}</td>
+                                    <td>{{ $employee ->user->role->role_name }}</td>
                                     <td>{{ $employee ->user->name }}</td>
-                                    <td>{{ $employee ->user->email }}</td>
                                     <td>
                                         <a class="btn btn-info" href="{{ route('employee.show',$employee->id) }}">Show</a>
                                         <a class="btn btn-primary" href="{{ route('employee.edit',$employee->id) }}">Edit</a>
