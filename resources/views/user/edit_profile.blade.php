@@ -9,10 +9,10 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-header">
-                                <a style="text-decoration: none;" class="text-dark font-xl"
-                                    href="{{ route('user.profile') }}">User / </a>
-                                <a style="text-decoration: none;" class="text-dark font-weight-bold font-xl" href="#">Edit
-                                    User</a>
+                                <a style="text-decoration: none;" class="text-dark"
+                                    href="{{ route('user.profile') }}">Profile / </a>
+                                <a style="text-decoration: none;" class="text-dark font-weight-bold" href="#">Edit
+                                    Profile</a>
                             </div>
                             <div class="card-body">
                                 @if ($errors->any())
@@ -25,7 +25,8 @@
                                     </ul>
                                 </div>
                                 @endif
-                                <form method="post" action="{{ route('user.update', $user->id) }}" id="myForm" enctype="multipart/form-data">
+                                <form method="post" action="{{ route('user.update', $user->id) }}" id="myForm"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group">
@@ -39,9 +40,8 @@
                                         $img = 'images/default_menu.png'
                                         @endphp
                                         @endif
-                                        <img class="mb-3" width="150px" src="{{ asset('storage/'.$img) }}">
-                                        <input type="file" class="form-control" name="image"
-                                            value="{{$user->profile_path}}">
+                                        <img width="150px" class="mb-3" src="{{ asset('storage/'.$img) }}">
+                                        <input type="file" class="form-control" name="image" value="{{$user->profile_path}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Name</label>
@@ -53,8 +53,7 @@
                                         <input type="email" name="email" class="form-control" id="email"
                                             value="{{ $user->email }}" aria-describedby="email">
                                     </div>
-
-                                    <button class="btn text-white" style="background-color: #b68834;">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
                         </div>
