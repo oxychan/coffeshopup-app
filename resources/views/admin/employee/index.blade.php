@@ -10,7 +10,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="float-right my-2 mb-4">
-                            <a class="btn btn-success" href="{{ route('employee.create') }}"> Input employee</a>
+                            <a class="btn btn-success" href="{{ route('employee.create') }}"> Input Employee</a>
                         </div>
 
                         @if ($message = Session::get('success'))

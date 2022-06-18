@@ -21,13 +21,13 @@
       </a>
     </li>  --}}
     <li class="nav-item">
-      <a class="nav-link" href="{{ route('menu.index') }}">
+      <a class="nav-link" href="{{ route('employee.index') }}">
         <span class="menu-title">Employees Table</span>
         <i class="mdi mdi-table-large menu-icon"></i>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">
+      <a class="nav-link" href="{{ route('report.index') }}">
         <span class="menu-title">Payment Reports</span>
         <i class="mdi mdi-table-large menu-icon"></i>
       </a>

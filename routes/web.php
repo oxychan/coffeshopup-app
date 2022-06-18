@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\Auth\LoginController;
 
 /*
@@ -59,6 +60,11 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
         
         // route for employee
         Route::resource('employee', EmployeeController::class);
+        
+        // route for report
+        Route::resource('report', ReportController::class);
+        // Route::get('/report', [ReportController::class, 'index']);
+        Route::get('/report_print', [ReportController::class, 'print_all'])->name('print');
     });
 });
 
