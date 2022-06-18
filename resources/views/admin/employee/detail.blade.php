@@ -22,6 +22,20 @@
                                 <td>{{$employee->user_id}}</td>
                             </tr>
                             <tr>
+                                <th>Role</th>
+                                <td>
+                                    @if ($employee->role_id === 2)
+                                    {{ 'Kasir' }}
+                                    @else
+                                    {{ 'Staff Dapur' }}
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>{{$employee->user->email}}</td>
+                            </tr>
+                            <tr>
                                 <th>Name</th>
                                 <td>{{$employee->user->name}}</td>
                             </tr>

@@ -30,6 +30,18 @@
                                 <input type="hidden" name="user_id" class="form-control" id="user_id" value="{{ $employee->user_id }}">
                             </div>
                             <div class="form-group">
+                                <label for="role_id">Role</label>
+                                <select name="role_id" class="form-control">
+                                    @if ($employee->user->role_id === 2)
+                                    <option selected value="2">Kasir</option>
+                                    <option value="3">Staff Dapur</option>
+                                    @else
+                                    <option value="2">Kasir</option>
+                                    <option selected value="3">Staff Dapur</option>
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="date_of_birth">Date of Birth</label>
                                 <input type="date" name="date_of_birth" class="form-control" id="date_of_birth" value="{{ $employee->date_of_birth }}"
                                     aria-describedby="date_of_birth">

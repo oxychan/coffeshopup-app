@@ -1,7 +1,7 @@
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
   <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-    <a class="navbar-brand brand-logo" href="/"><img src="{{ asset('assets/images/logo.svg') }}" alt="logo" /></a>
-    <a class="navbar-brand brand-logo-mini" href="/"><img src="{{ asset('assets/images/logo-mini.svg') }}" alt="logo" /></a>
+    <a class="navbar-brand brand-logo font-weight-bold" href="/">Coffeshop Up</a>
+    <a class="navbar-brand brand-logo-mini" href="/"><img src="{{ asset('assets/images/logo-1.png') }}" alt="logo" /></a>
   </div>
   <div class="navbar-menu-wrapper d-flex align-items-stretch">
     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -11,7 +11,7 @@
       <li class="nav-item nav-profile dropdown">
         <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
           <div class="nav-profile-img">
-            <img src="{{ asset('assets/images/faces/face1.jpg') }}" alt="image">
+            <img src="{{ asset('assets/images/faces/employee.png') }}" alt="image">
             <span class="availability-status online"></span>
           </div>
           <div class="nav-profile-text">
@@ -27,7 +27,7 @@
           <a class="dropdown-item" href="#">
               <form action="/logout" method="post">
                 @csrf
-                <i class="mdi mdi-logout me-2 text-primary"></i><input class="me-2 text-primary" type="submit" value="Logout">
+                <i class="mdi mdi-logout me-2 text-primary"></i><input style="border: none;" class="bg-white text-primary" type="submit" value="Logout">
               </form>
             @endauth
             </a>

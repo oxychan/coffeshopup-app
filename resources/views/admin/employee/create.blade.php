@@ -23,12 +23,31 @@
                         <form method="post" action="{{ route('employee.store') }}" id="myForm"
                             enctype="multipart/form-data">
                             @csrf
-                            <div class="form-group">
+                            {{--  <div class="form-group">
                                 <label for="user">Email -> Role ID</label>
                                 <select name="user" class="form-control">
                                     @foreach ($user as $us)
                                     <option value="{{ $us->id }}">{{ $us->email }} -> {{ $us->role_id }}</option>
                                     @endforeach
+                                </select>
+                            </div>  --}}
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" name="name" class="form-control" id="name" aria-describedby="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="form-control" id="email" aria-describedby="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" class="form-control" id="password" aria-describedby="password">
+                            </div>
+                            <div class="form-group">
+                                <label for="role_id">Role</label>
+                                <select name="role_id" class="form-control">
+                                    <option value="2">Kasir</option>
+                                    <option value="3">Staff Dapur</option>
                                 </select>
                             </div>
                             <div class="form-group">

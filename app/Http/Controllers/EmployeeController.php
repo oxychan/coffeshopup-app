@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
 use App\Models\User;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class EmployeeController extends Controller
@@ -44,7 +45,10 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'user' => 'required',
+            'name' => 'required',
+            'email' => 'required',
+            'role_id' => 'required',
+            'password' => 'required',
             'date_of_birth' => 'required',
             'address' => 'required',
             'phone' => 'required',
@@ -58,7 +62,13 @@ class EmployeeController extends Controller
         $employee->sex = $request->get('sex'); 
         
         $user = new User;
-        $user->id = $request->get('user');
+        $user->name = $request->get('name'); 
+        $user->email = $request->get('email'); 
+        $user->role_id = $request->get('role_id'); 
+        $pwd = $request->get('password');
+        $user->password = Hash::make($pwd); 
+        $user->email_verified_at = date('Y/m/d H:i:s'); 
+        $user->save();
         
         $employee->user()->associate($user);
         $employee->save();
@@ -104,19 +114,23 @@ class EmployeeController extends Controller
     {
         $request->validate([
             'user_id' => 'required',
+            'role_id' => 'required',
             'date_of_birth' => 'required',
             'address' => 'required',
             'phone' => 'required',
             'sex' => 'required',
         ]);
         
-        $employee = Employee::where('id', $id)->first();
+        $employee = Employee::with('user')->where('id', $id)->first();
         $employee->user_id = $request->get('user_id'); 
+        $employee->user->role_id = $request->get('role_id'); 
         $employee->date_of_birth = $request->get('date_of_birth'); 
         $employee->address = $request->get('address'); 
         $employee->phone = $request->get('phone'); 
         $employee->sex = $request->get('sex'); 
+
         $employee->save();
+        $employee->user->save();
         
         return redirect()->route('employee.index')
         ->with('success', 'Employee Updated Successfully');
