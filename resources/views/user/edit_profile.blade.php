@@ -25,10 +25,11 @@
                                     </ul>
                                 </div>
                                 @endif
-                                <form method="post" action="{{ route('user.update', $user->id) }}" id="myForm"
+                                <form method="post" action="/user/{{ $user->id }}" id="myForm"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
+                                    <input type="hidden" name="prevImage" id="prevImage" value="{{ $user->profile_path }}">
                                     <div class="form-group">
                                         <label for="image">Photo Profile</label><br>
                                         @if ($user->profile_path != NULL)
@@ -53,7 +54,7 @@
                                         <input type="email" name="email" class="form-control" id="email"
                                             value="{{ $user->email }}" aria-describedby="email">
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button class="btn text-white" style="background-color: #b68834;">Submit</button>
                                 </form>
                             </div>
                         </div>

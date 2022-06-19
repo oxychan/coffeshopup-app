@@ -41,10 +41,14 @@
                                     <td>{{ $employee ->user_id }}</td>
                                     <td>{{ $employee ->user->role->role_name }}</td>
                                     <td>{{ $employee ->user->name }}</td>
-                                    <td>
-                                        <a class="btn btn-info" href="{{ route('employee.show',$employee->id) }}">Show</a>
-                                        <a class="btn btn-primary" href="{{ route('employee.edit',$employee->id) }}">Edit</a>
-                                        <button onclick="show_alert({{$employee->id}})" class="btn btn-danger">Delete</button>                                    
+                                    <td class="d-flex justify-content-center">
+                                        <a class="btn btn-info  mx-1" href="{{ route('employee.show',$employee->id) }}">Show</a>
+                                        <a class="btn btn-primary  mx-1" href="{{ route('employee.edit',$employee->id) }}">Edit</a>
+                                        {{--  <form action="{{ route('employee.destroy',$employee->id) }}" method="POST">
+                                            @method('delete')
+                                            @csrf
+                                            <button class="btn btn-danger  mx-1" onclick="return confirm('beneran mau hapus?')">Delete</button>
+                                        </form>                                      --}}
                                     </td>
                                 </tr>
                                 @endforeach

@@ -81,21 +81,30 @@ class UserController extends Controller
         $user = User::where('id', $id)->first();
         $user->name = $request->get('name');
         $user->email = $request->get('email');
-        $user->save();
-        
-        if ($request->file('image')) {
-            if ($user->profile_path && file_exists(storage_path('app/public/'.$user->profile_path))) {
-                Storage::delete('public/'.$user->profile_path);
-            } 
-            $image_name = $request->file('image')->store('user_profiles', 'public');
-        } else {
-            $image_name = $user->profile_path;
+        $pwd = $request->get('password');
+        $pwd1 = $request->get('password1');
+        if ($pwd !== $pwd1) {
+            return redirect()->route('user.edit_password', $user->id)
+            ->with('error', 'Password does not match');
+        } 
+        else {
+            $user->password = Hash::make($pwd);
+            $user->save();
+            
+            if ($request->file('image')) {
+                if ($user->profile_path && file_exists(storage_path('app/public/'.$user->profile_path))) {
+                    Storage::delete('public/'.$user->profile_path);
+                } 
+                $image_name = $request->file('image')->store('user_profiles', 'public');
+            } else {
+                $image_name = $user->profile_path;
+            }
+            $user->profile_path = $image_name;
+            $user->save();
+            
+            return redirect()->route('user.index')
+            ->with('success', 'Data Updated Successfully');
         }
-        $user->profile_path = $image_name;
-        $user->save();
-        
-        return redirect()->route('user.index')
-        ->with('success', 'Profile Updated Successfully');
     }
 
     /**

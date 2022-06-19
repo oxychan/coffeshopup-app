@@ -111,7 +111,7 @@
     <script src="{{ asset('assets/js/parallax.min.js') }}"></script>
     <script src="{{ asset('assets/js/waypoints.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.counterup.min.js') }}"></script>
-    <script src="{{ asset('assets/js/mail-script.js') }}"></script>
+    {{--  <script src="{{ asset('assets/js/mail-script.js') }}"></script>  --}}
     <script src="{{ asset('assets/js/main.js') }}"></script>
 </body>
 
