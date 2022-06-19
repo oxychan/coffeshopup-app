@@ -1,5 +1,9 @@
-@extends('layouts.adminLayout')
+@extends('layouts.dashboardLayout')
+
+@section('title', 'Coffeeup | Sales Report')
+
 @section('container')
+
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="page-header">

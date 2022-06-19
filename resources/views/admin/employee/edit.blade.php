@@ -1,5 +1,9 @@
-@extends('layouts.adminLayout')
+@extends('layouts.dashboardLayout')
+
+@section('title', 'Coffeeup | Edit Employee')
+
 @section('container')
+
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">

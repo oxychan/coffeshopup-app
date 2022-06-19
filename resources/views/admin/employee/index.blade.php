@@ -1,5 +1,9 @@
-@extends('layouts.adminLayout')
+@extends('layouts.dashboardLayout')
+
+@section('title', 'Coffeeup | Employees Table')
+
 @section('container')
+
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="page-header">
@@ -41,8 +45,8 @@
                                     <td>{{ $employee ->user_id }}</td>
                                     <td>{{ $employee ->user->role->role_name }}</td>
                                     <td>{{ $employee ->user->name }}</td>
-                                    <td class="d-flex justify-content-center">
-                                        <a class="btn btn-info  mx-1" href="{{ route('employee.show',$employee->id) }}">Show</a>
+                                    <td class="d-flex">
+                                        <a class="btn btn-info  mx-1" href="{{ route('employee.show',$employee->id) }}">Detail</a>
                                         <a class="btn btn-primary  mx-1" href="{{ route('employee.edit',$employee->id) }}">Edit</a>
                                         {{--  <form action="{{ route('employee.destroy',$employee->id) }}" method="POST">
                                             @method('delete')

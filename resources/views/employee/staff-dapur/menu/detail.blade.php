@@ -1,5 +1,9 @@
-@extends('layouts.menuLayout')
+@extends('layouts.dashboardLayout')
+
+@section('title', 'Coffeeup | Detail Menu')
+
 @section('container')
+
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
@@ -20,11 +24,15 @@
                                 <td>{{$menu->name}}</td>
                             </tr>
                             <tr>
+                                <th>Type</th>
+                                <td>{{$menu->type}}</td>
+                            </tr>
+                            <tr>
                                 <th>Price</th>
                                 <td>{{$menu->price}}</td>
                             </tr>
                             <tr>
-                                <th>Price</th>
+                                <th>Stock</th>
                                 <td>{{$menu->stock}}</td>
                             </tr>
                             <tr>
@@ -41,7 +49,7 @@
                                 <td><img width="100px" class="rounded" src="{{ asset('storage/' . $img) }}"></td>
                             </tr>
                         </table>
-                        <a class="btn btn-success mt-3" href="{{ route('menu.index') }}">Kembali</a>
+                        <a class="btn btn-success mt-3" href="{{ route('menu.index') }}">Back</a>
                     </div>
                 </div>
             </div>

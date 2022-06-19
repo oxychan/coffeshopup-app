@@ -1,5 +1,9 @@
-@extends('layouts.menuLayout')
+@extends('layouts.dashboardLayout')
+
+@section('title', 'Coffeeup | Edit Menu')
+
 @section('container')
+
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
@@ -28,6 +32,18 @@
                                 <label for="name">Name</label>
                                 <input type="text" name="name" class="form-control" id="name" value="{{ $menu->name }}"
                                     aria-describedby="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="type">Type</label>
+                                <select name="type" class="form-control">
+                                    @if ($menu->type === 'food')
+                                    <option selected value="food">Food</option>
+                                    <option value="beverage">Beverage</option>
+                                    @else
+                                    <option selected value="beverage">Beverage</option>
+                                    <option value="food">Food</option>
+                                    @endif
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="price">Price</label>

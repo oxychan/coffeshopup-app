@@ -15,12 +15,6 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/kasir/dashboard">
-        <span class="menu-title">Dashboard</span>
-        <i class="mdi mdi-home menu-icon"></i>
-      </a>
-    </li>
-    <li class="nav-item">
       <a class="nav-link" href="{{ route('payment.index') }}">
         <span class="menu-title">Payments Table</span>
         <i class="mdi mdi-table-large menu-icon"></i>

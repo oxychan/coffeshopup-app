@@ -43,9 +43,8 @@ Route::group(['middleware' => ['auth', 'role:buyer']], function() {
     Route::get('/user/profile', function() {
         return view('user.profile');
     })->middleware('verified')->name('user.profile'); // email must verified before accesing this route or page
-    Route::get('/user/edit_password/{id}', [UserController::class, 'edit_password'])->name('user.edit_password'); // email must verified before accesing this route or page
-    Route::get('/user/update_password/{id}', [UserController::class, 'update_password'])->name('user.update_password'); // email must verified before accesing this route or page
-    
+    Route::get('/user/edit_password/{id}', [UserController::class, 'edit_password'])
+    ->middleware('verified')->name('user.edit_password'); // email must verified before accesing this route or page
 
     // route for user
         Route::resource('user', UserController::class)->middleware('verified');
@@ -62,7 +61,7 @@ Route::group(['middleware' => ['auth', 'role:staff-dapur']], function() {
     });
 });
 
-// routes for employee:admin
+// routes for admin
 Route::group(['middleware' => ['auth', 'role:admin']], function() {
     Route::prefix('admin')->group( function () {
         Route::get('/', [EmployeeController::class, 'index']);
@@ -73,7 +72,6 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
         
         // route for report
         Route::resource('report', ReportController::class);
-        // Route::get('/report', [ReportController::class, 'index']);
         Route::get('/report_print', [ReportController::class, 'print_all'])->name('print');
     });
 });

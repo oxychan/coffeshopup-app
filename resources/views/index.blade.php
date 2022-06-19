@@ -1,5 +1,9 @@
 @extends('layouts.masterLayout')
+
+@section('title', 'Coffeeup | Home')
+
 @section('container')
+
 <!-- start banner Area -->
 <section class="banner-area" id="home">
 	<div class="container">
@@ -32,8 +36,9 @@
 					Coffee Making Live</h1>
 				<p><span>We are here to listen from you deliver exellence</span></p>
 				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod temp or incididunt ut
-					labore et dolore magna aliqua. Ut enim ad minim.
+					A coffeehouse, coffee shop, or café is an establishment that primarily serves coffee of various types, e.g. espresso,
+					latte, and cappuccino. Some coffeehouses may serve cold drinks, such as iced coffee, iced tea, and other non-caffeinated
+					beverages
 				</p>
 				<img class="img-fluid" src="../assets/img/signature.png" alt="">
 			</div>
@@ -138,56 +143,56 @@
 			<div class="col-lg-6 col-md-6 single-review">
 				<img src="../assets/img/r1.png" alt="">
 				<div class="title d-flex flex-row">
-					<h4>lorem ipusm</h4>
+					<h4>Fast Serve</h4>
 					<div class="star">
 						<span class="fa fa-star checked"></span>
 						<span class="fa fa-star checked"></span>
 						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star"></span>
+						<span class="fa fa-star checked"></span>
 						<span class="fa fa-star"></span>
 					</div>
 				</div>
 				<p>
-					Accessories Here you can find the best computer accessory for your laptop, monitor, printer,
-					scanner, speaker. Here you can find the best computer accessory for your laptop, monitor,
-					printer, scanner, speaker.
+					A coffeehouse, coffee shop, or café is an establishment that primarily serves coffee of various types, e.g. espresso,
+					latte, and cappuccino. Some coffeehouses may serve cold drinks, such as iced coffee, iced tea, and other non-caffeinated
+					beverages
 				</p>
 			</div>
 			<div class="col-lg-6 col-md-6 single-review">
 				<img src="../assets/img/r2.png" alt="">
 				<div class="title d-flex flex-row">
-					<h4>lorem ipusm</h4>
+					<h4>Fast Order</h4>
 					<div class="star">
 						<span class="fa fa-star checked"></span>
 						<span class="fa fa-star checked"></span>
-						<span class="fa fa-star"></span>
-						<span class="fa fa-star"></span>
+						<span class="fa fa-star checked"></span>
+						<span class="fa fa-star checked"></span>
 						<span class="fa fa-star"></span>
 					</div>
 				</div>
 				<p>
-					Accessories Here you can find the best computer accessory for your laptop, monitor, printer,
-					scanner, speaker. Here you can find the best computer accessory for your laptop, monitor,
-					printer, scanner, speaker.
+					A coffeehouse, coffee shop, or café is an establishment that primarily serves coffee of various types, e.g. espresso,
+					latte, and cappuccino. Some coffeehouses may serve cold drinks, such as iced coffee, iced tea, and other non-caffeinated
+					beverages
 				</p>
 			</div>
 		</div>
 		<div class="row counter-row">
 			<div class="col-lg-3 col-md-6 single-counter">
 				<h1 class="counter">2536</h1>
-				<p>Happy Client</p>
+				<p>Happy Customers</p>
 			</div>
 			<div class="col-lg-3 col-md-6 single-counter">
 				<h1 class="counter">7562</h1>
-				<p>Total Projects</p>
+				<p>Total Customers</p>
 			</div>
 			<div class="col-lg-3 col-md-6 single-counter">
-				<h1 class="counter">2013</h1>
+				<h1 class="counter">3013</h1>
 				<p>Cups Coffee</p>
 			</div>
 			<div class="col-lg-3 col-md-6 single-counter">
 				<h1 class="counter">10536</h1>
-				<p>Total Submitted</p>
+				<p>Total Orders</p>
 			</div>
 		</div>
 	</div>

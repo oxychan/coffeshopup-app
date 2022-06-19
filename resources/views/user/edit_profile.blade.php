@@ -1,5 +1,9 @@
 @extends('layouts.masterLayout')
+
+@section('title', 'Coffeeup | Edit Profile')
+
 @section('container')
+
 <div class="d-flex" style="height: 74px; background-color: rgba(20, 2, 0, 0.8);"></div>
 <section class="user-area pt-4 pb-5" id="coffee">
     <div class="container mt-5 bg-white rounded">
@@ -38,7 +42,7 @@
                                         @endphp
                                         @else
                                         @php
-                                        $img = 'images/default_menu.png'
+                                        $img = 'images/default_profile.png'
                                         @endphp
                                         @endif
                                         <img width="150px" class="mb-3" src="{{ asset('storage/'.$img) }}">

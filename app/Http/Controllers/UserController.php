@@ -117,24 +117,10 @@ class UserController extends Controller
     {
         //
     }
+    
     public function edit_password($id)
     {
         $user = User::where('id', $id)->first();
         return view('user.edit_password', compact('user'));
-    }
-    
-    public function update_password(Request $request, $id)
-    {
-        $request->validate([
-            'password' => 'required',
-        ]);
-
-        $user = User::where('id', $id)->first();
-        $pwd = $request->get('password');
-        $user->password = Hash::make($pwd); 
-        $user->save();
-        
-        return redirect()->route('user.profile')
-        ->with('success', 'Profile Updated Successfully');
     }
 }

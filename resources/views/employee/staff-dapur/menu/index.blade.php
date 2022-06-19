@@ -1,5 +1,9 @@
-@extends('layouts.menuLayout')
+@extends('layouts.dashboardLayout')
+
+@section('title', 'Coffeeup | Menus Table')
+
 @section('container')
+
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="page-header">
@@ -62,10 +66,16 @@
                                     @endif
                                     <td><img class="rounded" width="50px" height="50px" src="{{ asset('storage/' . $img)}}" alt="" srcset=""></td>
                                     <td>
-                                        <a class="btn btn-info" href="{{ route('menu.show',$menu->id) }}">Show</a>
-                                        <a class="btn btn-primary" href="{{ route('menu.edit',$menu->id) }}">Edit</a>
-                                        <button onclick="show_alert({{$menu->id}})" class="btn btn-danger">Delete</button>
-                                        {{-- <a class="btn btn-primary" onclick="confirm_modal_delete()">Delete</a> --}}
+                                        <div class="d-flex">
+                                            <a class="btn btn-info mx-1" href="{{ route('menu.show',$menu->id) }}">Show</a>
+                                            <a class="btn btn-primary mx-1" href="{{ route('menu.edit',$menu->id) }}">Edit</a>
+                                            <form action="{{ route('menu.destroy',$menu->id) }}" method="POST">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="btn btn-danger mx-1" onclick="return confirm('Are you sure want to delete this menu?')">Delete</button>
+                                            </form>
+                                        </div>
+                                        {{--  <button onclick="show_alert({{$menu->id}})" class="btn btn-danger">Delete</button>  --}}
                                     
                                     </td>
                                 </tr>

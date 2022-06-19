@@ -53,6 +53,7 @@ class MenuController extends Controller
             'name' => 'required',
             'price' => 'required',
             'stock' => 'required',
+            'type' => 'required',
         ]);
 
         if ($request->file('image')) {
@@ -65,6 +66,7 @@ class MenuController extends Controller
         $menu->name = $request->get('name'); 
         $menu->price = $request->get('price'); 
         $menu->stock = $request->get('stock'); 
+        $menu->type = $request->get('type'); 
         $menu->menu_photo_path = $image_name;
         $menu->save();
 
@@ -109,12 +111,14 @@ class MenuController extends Controller
             'name' => 'required',
             'price' => 'required',
             'stock' => 'required',
+            'type' => 'required',
         ]);
 
         $menu = Menu::where('id', $id)->first();
         $menu->name = $request->get('name');
         $menu->price = $request->get('price');
         $menu->stock = $request->get('stock');
+        $menu->type = $request->get('type');
         $menu->save();
         
         if ($request->file('image')) {
