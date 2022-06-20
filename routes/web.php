@@ -50,17 +50,6 @@ Route::group(['middleware' => ['auth', 'role:buyer']], function() {
         Route::resource('user', UserController::class)->middleware('verified');
 });
 
-
-// routes for employee:staff-dapur
-Route::group(['middleware' => ['auth', 'role:staff-dapur']], function() {
-    Route::prefix('employee')->group( function () {
-        Route::get('/staff-dapur', [MenuController::class, 'index']);
-        
-        // route for menu
-        Route::resource('/staff-dapur/menu', MenuController::class);
-    });
-});
-
 // routes for admin
 Route::group(['middleware' => ['auth', 'role:admin']], function() {
     Route::prefix('admin')->group( function () {
@@ -76,49 +65,71 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
     });
 });
 
+// routes for employee:staff-dapur
+Route::group(['middleware' => ['auth', 'role:staff-dapur']], function() {
+    Route::prefix('employee')->group( function () {
+        //route for profile
+        Route::get('/staff-dapur/profile/{id}', [EmployeeController::class, 'show_profile_staff'])->name('employee.staff.show_profile');
+        Route::get('/staff-dapur/edit_profile/{id}', [EmployeeController::class, 'edit_profile_staff'])->name('employee.staff.edit_profile');
+        Route::get('/staff-dapur/edit_password/{id}', [EmployeeController::class, 'edit_password_staff'])->name('employee.staff.edit_password');
+        Route::put('/staff-dapur/update_profile/{id}', [EmployeeController::class, 'update_profile_staff'])->name('employee.staff.update_profile');
+        Route::put('/staff-dapur/update_password/{id}', [EmployeeController::class, 'update_password_staff'])->name('employee.staff.update_password');
+        
+        Route::get('/staff-dapur', [MenuController::class, 'index']);
+        
+        // route for menu
+        Route::resource('/staff-dapur/menu', MenuController::class);
+    });
+});
 
 // routes for employee:kasir
 Route::group(['middleware' => ['auth', 'role:kasir']], function() {
     Route::prefix('employee')->group( function () {
+        //route for profile
+        Route::get('/kasir/profile/{id}', [EmployeeController::class, 'show_profile_kasir'])->name('employee.kasir.show_profile');
+        Route::get('/kasir/edit_profile/{id}', [EmployeeController::class, 'edit_profile_kasir'])->name('employee.kasir.edit_profile');
+        Route::get('/kasir/edit_password/{id}', [EmployeeController::class, 'edit_password_kasir'])->name('employee.kasir.edit_password');
+        Route::put('/kasir/update_profile/{id}', [EmployeeController::class, 'update_profile_kasir'])->name('employee.kasir.update_profile');
+        Route::put('/kasir/update_password/{id}', [EmployeeController::class, 'update_password_kasir'])->name('employee.kasir.update_password');
+        
         Route::get('/kasir', [PaymentController::class, 'index']);
 
         // route for payment
         Route::resource('/kasir/payment', PaymentController::class);
         Route::get('/kasir/payment/print/{id}', [PaymentController::class, 'print'])->name('print_payment');
         
-        Route::get('/ui-features/buttons', function () {
-            return view('layouts.partials.ui-features.buttons');
-        });
-        Route::get('/ui-features/typography', function () {
-            return view('layouts.partials.ui-features.typography');
-        });
-        Route::get('/icons/mdi', function () {
-            return view('layouts.partials.icons.mdi');
-        });
-        Route::get('/forms/basic_elements', function () {
-            return view('layouts.partials.forms.basic_elements');
-        });
-        Route::get('/charts/chartjs', function () {
-            return view('layouts.partials.charts.chartjs');
-        }); 
-        Route::get('/tables/basic-table', function () {
-            return view('layouts.partials.tables.basic-table');
-        }); 
-        Route::get('/samples/blank-page', function () {
-            return view('layouts.partials.samples.blank-page');
-        }); 
-        Route::get('/samples/login', function () {
-            return view('layouts.partials.samples.login');
-        }); 
-        Route::get('/samples/register', function () {
-            return view('layouts.partials.samples.register');
-        }); 
-        Route::get('/samples/error-500', function () {
-            return view('layouts.partials.samples.error-500');
-        }); 
-        Route::get('/samples/error-404', function () {
-            return view('layouts.partials.samples.error-404');
-        }); 
+        // Route::get('/ui-features/buttons', function () {
+        //     return view('layouts.partials.ui-features.buttons');
+        // });
+        // Route::get('/ui-features/typography', function () {
+        //     return view('layouts.partials.ui-features.typography');
+        // });
+        // Route::get('/icons/mdi', function () {
+        //     return view('layouts.partials.icons.mdi');
+        // });
+        // Route::get('/forms/basic_elements', function () {
+        //     return view('layouts.partials.forms.basic_elements');
+        // });
+        // Route::get('/charts/chartjs', function () {
+        //     return view('layouts.partials.charts.chartjs');
+        // }); 
+        // Route::get('/tables/basic-table', function () {
+        //     return view('layouts.partials.tables.basic-table');
+        // }); 
+        // Route::get('/samples/blank-page', function () {
+        //     return view('layouts.partials.samples.blank-page');
+        // }); 
+        // Route::get('/samples/login', function () {
+        //     return view('layouts.partials.samples.login');
+        // }); 
+        // Route::get('/samples/register', function () {
+        //     return view('layouts.partials.samples.register');
+        // }); 
+        // Route::get('/samples/error-500', function () {
+        //     return view('layouts.partials.samples.error-500');
+        // }); 
+        // Route::get('/samples/error-404', function () {
+        //     return view('layouts.partials.samples.error-404');
+        // }); 
     });
-    
 });

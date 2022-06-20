@@ -48,11 +48,11 @@
                                     <td class="d-flex">
                                         <a class="btn btn-info  mx-1" href="{{ route('employee.show',$employee->id) }}">Detail</a>
                                         <a class="btn btn-primary  mx-1" href="{{ route('employee.edit',$employee->id) }}">Edit</a>
-                                        {{--  <form action="{{ route('employee.destroy',$employee->id) }}" method="POST">
+                                        <form action="{{ route('employee.destroy',$employee->id) }}" method="POST">
                                             @method('delete')
                                             @csrf
-                                            <button class="btn btn-danger  mx-1" onclick="return confirm('beneran mau hapus?')">Delete</button>
-                                        </form>                                      --}}
+                                            <button class="btn btn-danger  mx-1" onclick="return confirm('Are you sure want to delete this employee?')">Delete</button>
+                                        </form>                                    
                                     </td>
                                 </tr>
                                 @endforeach

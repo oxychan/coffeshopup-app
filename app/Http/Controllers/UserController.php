@@ -76,13 +76,15 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required',
+            'password' => 'min:8',
+            'confirm_password' => 'min:8',
         ]);
 
         $user = User::where('id', $id)->first();
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $pwd = $request->get('password');
-        $pwd1 = $request->get('password1');
+        $pwd1 = $request->get('confirm_password');
         if ($pwd !== $pwd1) {
             return redirect()->route('user.edit_password', $user->id)
             ->with('error', 'Password does not match');

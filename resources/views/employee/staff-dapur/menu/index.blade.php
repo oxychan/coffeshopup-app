@@ -124,5 +124,5 @@
         $('#del').attr("action", action);
     }
 
-  </script>
+</script>
 @endsection

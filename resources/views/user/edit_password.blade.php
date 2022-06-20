@@ -44,8 +44,8 @@
                                             aria-describedby="password">
                                     </div>
                                     <div class="form-group">
-                                        <label for="password1">Confirm Password</label>
-                                        <input type="password" name="password1" class="form-control" id="password1"
+                                        <label for="confirm_password">Confirm Password</label>
+                                        <input type="password" name="confirm_password" class="form-control" id="password1"
                                             aria-describedby="password1">
                                     </div>
                                     <button class="btn text-white" style="background-color: #b68834;">Submit</button>
