@@ -23,14 +23,14 @@
     <!--
 			CSS
 			============================================= -->
-    <link rel="stylesheet" href="../assets/css/linearicons.css">
-    <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../assets/css/bootstrap.css">
-    <link rel="stylesheet" href="../assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="../assets/css/nice-select.css">
-    <link rel="stylesheet" href="../assets/css/animate.min.css">
-    <link rel="stylesheet" href="../assets/css/owl.carousel.css">
-    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/linearicons.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 </head>
 
 <body>
@@ -62,10 +62,9 @@
                 </div>
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">
-                        <li class="menu-active"><a href="#home">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#coffee">Menu</a></li>
-                        <li><a href="#review">Review</a></li>
+                        <li class="menu-active"><a href="{{ route('index') }}">Home</a></li>
+                        <li><a href="{{ route('user.menus') }}">Menu</a></li>
+                        <li><a href="{{ route('user.profile') }}">Profile</a></li>
                         @guest
                             <li><a href="{{ route('login') }}" class="btn btn-primary">Login</a></li>
                         @endguest
@@ -73,7 +72,7 @@
                             <li>
                                 <form action="/logout" method="post">
                                     @csrf
-                                    <a>Halo {{auth()->user()->name }}, </a> 
+                                    <a class="text-white">Halo {{auth()->user()->name }}, </a> 
                                     <input type="submit" value="Logout">
                                 </form>
                             </li>
@@ -89,7 +88,7 @@
 
     @include('layouts.footer')
 
-    <script src="../assets/js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="{{ asset('assets/js/vendor/jquery-2.2.4.min.js') }}"></script>
     
     @yield('scripts')
 
@@ -98,22 +97,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
     </script>
-    <script src="../assets/js/vendor/bootstrap.min.js"></script>
+    <script src="{{ asset('assets/js/vendor/bootstrap.min.js') }}"></script>
     <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
-    <script src="../assets/js/easing.min.js"></script>
-    <script src="../assets/js/hoverIntent.js"></script>
-    <script src="../assets/js/superfish.min.js"></script>
-    <script src="../assets/js/jquery.ajaxchimp.min.js"></script>
-    <script src="../assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="../assets/js/owl.carousel.min.js"></script>
-    <script src="../assets/js/jquery.sticky.js"></script>
-    <script src="../assets/js/jquery.nice-select.min.js"></script>
-    <script src="../assets/js/parallax.min.js"></script>
-    <script src="../assets/js/waypoints.min.js"></script>
-    <script src="../assets/js/jquery.counterup.min.js"></script>
-    <script src="../assets/js/mail-script.js"></script>
-    <script src="../assets/js/main.js"></script>
+    <script src="{{ asset('assets/js/easing.min.js') }}"></script>
+    <script src="{{ asset('assets/js/hoverIntent.js') }}"></script>
+    <script src="{{ asset('assets/js/superfish.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.ajaxchimp.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.sticky.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('assets/js/parallax.min.js') }}"></script>
+    <script src="{{ asset('assets/js/waypoints.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('assets/js/mail-script.js') }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
 </body>
 
 </html>

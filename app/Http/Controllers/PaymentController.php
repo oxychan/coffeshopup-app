@@ -6,6 +6,7 @@ use App\Models\Payment;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
+Use PDF;
 
 class PaymentController extends Controller
 {
@@ -119,5 +120,13 @@ class PaymentController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function print($id)
+    {
+        $payment = Payment::with('order')->where('id', $id)->first();
+        
+        $pdf = PDF::loadview('employee.kasir.payment.print', ['payment' => $payment]);
+        return $pdf->stream();
     }
 }

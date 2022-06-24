@@ -10,7 +10,7 @@
                         <a style="text-decoration: none;" class="text-dark font-weight-bold" href="#">Detail Payment</a>
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped table-hover">
+                        <table class="table table-striped table-hover mb-2">
                             <tr>
                                 <th>ID Payment</th>
                                 <td>{{$payment->id}}</td>
@@ -24,33 +24,46 @@
                                 <td>{{$payment->order->user->email}}</td>
                             </tr>
                             <tr>
+                                <th>Order Date</th>
+                                <td>{{$payment->order->order_date}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped table-hover mb-4">
+                            <tr>
                                 <th>Nama menu</th>
                                 <th>QTY</th>
+                                <th>Subtotal</th>
                             </tr>
                             @foreach ($payment->order->orderDetail as $orderDetail)
                             <tr>
                                 <td>{{ $orderDetail->menu->name }}</td>
                                 <td>{{ $orderDetail->qty }}</td>
+                                <td>{{ 
+                                    $orderDetail->menu->price * $orderDetail->qty
+                                    }}</td>
                             </tr>
                             @endforeach
                             <tr>
+                                <th></th>
                                 <th>Total</th>
                                 <td>{{$payment->order->total}}</td>
                             </tr>
                             <tr>
+                                <th></th>
                                 <th>Payment</th>
                                 <td>{{$payment->payment}}</td>
                             </tr>
                             <tr>
+                                <th></th>
                                 <th>Change</th>
                                 <td>{{$payment->change}}</td>
                             </tr>
-                            <tr>
-                                <th>Order Date</th>
-                                <td>{{$payment->order->order_date}}</td>
-                            </tr>
                         </table>
-                        <a class="btn btn-success mt-3" href="{{ route('payment.index') }}">Kembali</a>
+                        <div class="d-flex">
+                            <a class="btn btn-success mt-3" href="{{ route('payment.index') }}">Kembali</a>
+                        </div>
                     </div>
                 </div>
             </div>

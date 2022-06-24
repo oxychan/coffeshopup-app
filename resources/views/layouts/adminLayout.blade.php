@@ -25,14 +25,13 @@
         @include('layouts.partials.navbar')
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
-            @include('layouts.partials.sidebarMenu')
+            @include('layouts.partials.sidebarAdmin')
 
             @yield('container')
         </div>
         <!-- page-body-wrapper ends -->
         @include('layouts.partials.footer')
     </div>
-
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="{{ asset('assets/vendors/js/vendor.bundle.base.js') }}"></script>
@@ -50,8 +49,6 @@
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
     <script src="{{ asset('assets/js/todolist.js') }}"></script>
     <!-- End custom js for this page -->
-
-    
 </body>
 
 </html>
