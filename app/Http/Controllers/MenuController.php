@@ -207,4 +207,19 @@ class MenuController extends Controller
         }
     }
 
+    public function getAllMenus(Request $request)
+    {
+        if($request->ajax())
+        {
+            $menu = Menu::all();
+
+            // dd(json_decode($menu));
+            return response()->json([
+                'menus' => $menu,
+            ]);
+
+            // dd($data);
+        }
+    }
+
 }

@@ -14,23 +14,44 @@
     <meta name="keywords" content="">
     <!-- meta character set -->
     <meta charset="UTF-8">
+
+    {{-- csrf token --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Site Title -->
     <title>Coffee</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
     <!--
 			CSS
 			============================================= -->
-    <link rel="stylesheet" href="{{asset('assets/css/linearicons.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('assets/css/linearicons.css')}}"> --}}
+    {{-- <link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}"> --}}
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/magnific-popup.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/nice-select.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/animate.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/owl.carousel.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    @yield('additional-css')
+    
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+        -moz-appearance: textfield;
+        }
+    </style>
 </head>
 
 <body>
@@ -72,6 +93,7 @@
                                     @csrf
                                     <a>Halo {{auth()->user()->name }}, </a> 
                                     <input type="submit" value="Logout">
+                                    <input type="hidden" name="id_user" id="id_user" value="{{ auth()->user()->id }}">
                                 </form>
                             </li>
                             

@@ -22,4 +22,8 @@ class Menu extends Model
     public function orderDetails() {
         return $this->hasMany(OrderDetial::class);
     }
+
+    public function carts() {
+        return $this->hasMany(Cart::class);
+    }
 }

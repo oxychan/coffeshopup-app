@@ -15,6 +15,7 @@ class OrderDetail extends Model
     protected $fillable = [
         'menu_id',
         'order_id',
+        'token',
         'qty',
     ];
 
