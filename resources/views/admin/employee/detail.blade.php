@@ -1,5 +1,9 @@
-@extends('layouts.adminLayout')
+@extends('layouts.dashboardLayout')
+
+@section('title', 'Coffeeup | Detail Employee')
+
 @section('container')
+
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
@@ -62,7 +66,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <a class="btn btn-success mt-3" href="{{ route('employee.index') }}">Kembali</a>
+                        <a class="btn btn-success mt-3" href="{{ route('employee.index') }}">Back</a>
                     </div>
                 </div>
             </div>

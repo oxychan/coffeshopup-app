@@ -5,19 +5,11 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Purple Admin</title>
-    <!-- plugins:css -->
+    <link rel="shortcut icon" href="{{ asset('images/fav.png') }}">
+    <title>@yield('title')</title>
     <link rel="stylesheet" href="{{ asset('assets/vendors/mdi/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/css/vendor.bundle.base.css') }}">
-    <!-- endinject -->
-    <!-- Plugin css for this page -->
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <!-- endinject -->
-    <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-    <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" />
 </head>
 
 <body>
@@ -25,8 +17,14 @@
         @include('layouts.partials.navbar')
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
-            @include('layouts.partials.sidebarAdmin')
-
+            @if (auth()->user()->role_id === 1)
+                @include('layouts.partials.sidebarAdmin')
+            @elseif (auth()->user()->role_id === 2)
+                @include('layouts.partials.sidebarPayment')
+            @elseif (auth()->user()->role_id === 3)
+                @include('layouts.partials.sidebarMenu')
+            @endif
+            
             @yield('container')
         </div>
         <!-- page-body-wrapper ends -->

@@ -55,18 +55,20 @@ class PaymentController extends Controller
             'employee_id' => 'required',
             'order' => 'required',
             'payment' => 'required',
-            'change' => 'required',
         ]);
         
         $payment = new Payment;
         $payment->employee_id = $request->get('employee_id');
         $payment->payment = $request->get('payment'); 
-        $payment->change = $request->get('change');
 
         $order = new Order;
         $order->id = $request->get('order');
+
+        $py = Payment::with('order')->where('id', $order->id)->first();
+        $payment->change = $request->get('payment') - $py->order->total;
         
         $payment->order()->associate($order);
+        
         $payment->save();
         
         return redirect()->route('payment.index')

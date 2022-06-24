@@ -6,8 +6,8 @@
                 <div class="single-footer-widget">
                     <h6>About Us</h6>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                        ut labore dolore magna aliqua.
+                        A coffeehouse, coffee shop, or café is an establishment that primarily serves coffee of various types, e.g. espresso,
+                        latte, and cappuccino.
                     </p>
                     <p class="footer-text">
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

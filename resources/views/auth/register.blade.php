@@ -24,7 +24,7 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label class="label" for="email">Email</label>
-                                <input type="email" class="form-control" placeholder=Eemail" name="email" id="email" required value="{{ old('email') }}">
+                                <input type="email" class="form-control" placeholder="Email" name="email" id="email" required value="{{ old('email') }}">
                             </div>
                             <div class="form-group mb-3">
                                 <label class="label" for="password">Password</label>

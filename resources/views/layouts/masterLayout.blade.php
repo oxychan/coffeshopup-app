@@ -5,7 +5,7 @@
     <!-- Mobile Specific Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="img/fav.png">
+    <link rel="shortcut icon" href="{{ asset('images/fav.png') }}">
     <!-- Author Meta -->
     <meta name="author" content="codepixer">
     <!-- Meta Description -->
@@ -15,7 +15,7 @@
     <!-- meta character set -->
     <meta charset="UTF-8">
     <!-- Site Title -->
-    <title>Coffee</title>
+    <title>@yield('title')</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -35,54 +35,7 @@
 
 <body>
 
-    <header id="header" id="home">
-        <div class="header-top">
-            <div class="container">
-                <div class="row justify-content-end">
-                    <div class="col-lg-8 col-sm-4 col-8 header-top-right no-padding">
-                        <ul>
-                            <li>
-                                Mon-Fri: 8am to 2pm
-                            </li>
-                            <li>
-                                Sat-Sun: 11am to 4pm
-                            </li>
-                            <li>
-                                <a href="tel:(012) 6985 236 7512">(012) 6985 236 7512</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row align-items-center justify-content-between d-flex">
-                <div id="logo">
-                    <a href="#"><img src="img/logo.png" alt="" title="" /></a>
-                </div>
-                <nav id="nav-menu-container">
-                    <ul class="nav-menu">
-                        <li class="menu-active"><a href="{{ route('index') }}">Home</a></li>
-                        <li><a href="{{ route('user.menus') }}">Menu</a></li>
-                        <li><a href="{{ route('user.profile') }}">Profile</a></li>
-                        @guest
-                            <li><a href="{{ route('login') }}" class="btn btn-primary">Login</a></li>
-                        @endguest
-                        @auth
-                            <li>
-                                <form action="/logout" method="post">
-                                    @csrf
-                                    <a class="text-white">Halo {{auth()->user()->name }}, </a> 
-                                    <input type="submit" value="Logout">
-                                </form>
-                            </li>
-                            
-                        @endauth
-                    </ul>
-                </nav><!-- #nav-menu-container -->
-            </div>
-        </div>
-    </header><!-- #header -->
+    @include('layouts.navbar')
 
     @yield('container')
 
@@ -111,7 +64,6 @@
     <script src="{{ asset('assets/js/parallax.min.js') }}"></script>
     <script src="{{ asset('assets/js/waypoints.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.counterup.min.js') }}"></script>
-    <script src="{{ asset('assets/js/mail-script.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
 </body>
 

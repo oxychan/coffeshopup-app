@@ -1,5 +1,9 @@
-@extends('layouts.menuLayout')
+@extends('layouts.dashboardLayout')
+
+@section('title', 'Coffeeup | Add Menu')
+
 @section('container')
+
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
@@ -26,6 +30,13 @@
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" name="name" class="form-control" id="name" aria-describedby="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="type">Type</label>
+                                <select name="type" class="form-control">
+                                    <option value="food">Food</option>
+                                    <option value="beverage">Beverage</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="price">Price</label>

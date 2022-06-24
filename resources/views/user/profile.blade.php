@@ -1,5 +1,9 @@
 @extends('layouts.masterLayout')
+
+@section('title', 'Coffeeup | User Profile')
+
 @section('container')
+
 <div class="d-flex" style="height: 74px; background-color: rgba(20, 2, 0, 0.8);"></div>
 <section class="menu-area pt-4 pb-5" id="coffee">
     <div class="container mt-5 bg-white rounded">
@@ -12,7 +16,7 @@
         </div>
         @endif
         @if ($message = Session::get('error'))
-        <div class="alert alert-error">
+        <div class="alert alert-danger">
             <p>{{ $message }}</p>
         </div>
         @endif
@@ -39,16 +43,16 @@
             @endphp
             @else
             @php
-            $img = 'images/default_menu.png'
+            $img = 'images/default_profile.png'
             @endphp
             @endif
-            <div class="col-4">
-                <img style="max-width: 250px; max-height: 250px;" src="{{ asset('storage/'.$img) }}" alt="">
+            <div class="col-6  justify-content-center">
+                <img style="max-width: 250px; max-height: 250px;" class="rounded" src="{{ asset('storage/'.$img) }}" alt="">
             </div>
         </div>
-        <div class="pb-5 mx-5 pr-5" align="right">
+        <div class="mx-5 pr-5 mb-5 pb-5" style="margin-right: 50px;" align="right">
             <a href="{{ route('user.edit', auth()->user()->id) }}">
-                <button class="btn text-white" style="background-color: #b68834;">
+                <button class="btn text-white ml-2" style="background-color: #b68834;">
                     Edit profile
                 </button>
             </a>

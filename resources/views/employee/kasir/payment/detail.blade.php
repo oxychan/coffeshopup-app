@@ -1,5 +1,9 @@
-@extends('layouts.paymentLayout')
+@extends('layouts.dashboardLayout')
+
+@section('title', 'Coffeeup | Detail Payment')
+
 @section('container')
+
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
@@ -14,6 +18,10 @@
                             <tr>
                                 <th>ID Payment</th>
                                 <td>{{$payment->id}}</td>
+                            </tr>
+                            <tr>
+                                <th>ID Order</th>
+                                <td>{{$payment->order->id}}</td>
                             </tr>
                             <tr>
                                 <th>ID Employee</th>
@@ -62,7 +70,7 @@
                             </tr>
                         </table>
                         <div class="d-flex">
-                            <a class="btn btn-success mt-3" href="{{ route('payment.index') }}">Kembali</a>
+                            <a class="btn btn-success mt-3" href="{{ route('payment.index') }}">Back</a>
                         </div>
                     </div>
                 </div>

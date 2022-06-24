@@ -1,5 +1,9 @@
 @extends('layouts.masterLayout')
+
+@section('title', 'Coffeeup | Edit Profile')
+
 @section('container')
+
 <div class="d-flex" style="height: 74px; background-color: rgba(20, 2, 0, 0.8);"></div>
 <section class="user-area pt-4 pb-5" id="coffee">
     <div class="container mt-5 bg-white rounded">
@@ -9,10 +13,10 @@
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-header">
-                                <a style="text-decoration: none;" class="text-dark font-xl"
-                                    href="{{ route('user.profile') }}">User / </a>
-                                <a style="text-decoration: none;" class="text-dark font-weight-bold font-xl" href="#">Edit
-                                    User</a>
+                                <a style="text-decoration: none;" class="text-dark"
+                                    href="{{ route('user.profile') }}">Profile / </a>
+                                <a style="text-decoration: none;" class="text-dark font-weight-bold" href="#">Edit
+                                    Profile</a>
                             </div>
                             <div class="card-body">
                                 @if ($errors->any())
@@ -25,9 +29,11 @@
                                     </ul>
                                 </div>
                                 @endif
-                                <form method="post" action="{{ route('user.update', $user->id) }}" id="myForm" enctype="multipart/form-data">
+                                <form method="post" action="/user/{{ $user->id }}" id="myForm"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
+                                    <input type="hidden" name="prevImage" id="prevImage" value="{{ $user->profile_path }}">
                                     <div class="form-group">
                                         <label for="image">Photo Profile</label><br>
                                         @if ($user->profile_path != NULL)
@@ -36,12 +42,11 @@
                                         @endphp
                                         @else
                                         @php
-                                        $img = 'images/default_menu.png'
+                                        $img = 'images/default_profile.png'
                                         @endphp
                                         @endif
-                                        <img class="mb-3" width="150px" src="{{ asset('storage/'.$img) }}">
-                                        <input type="file" class="form-control" name="image"
-                                            value="{{$user->profile_path}}">
+                                        <img width="150px" class="mb-3" src="{{ asset('storage/'.$img) }}">
+                                        <input type="file" class="form-control" name="image" value="{{$user->profile_path}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Name</label>
@@ -53,7 +58,6 @@
                                         <input type="email" name="email" class="form-control" id="email"
                                             value="{{ $user->email }}" aria-describedby="email">
                                     </div>
-
                                     <button class="btn text-white" style="background-color: #b68834;">Submit</button>
                                 </form>
                             </div>

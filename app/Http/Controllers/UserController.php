@@ -76,26 +76,37 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required',
+            'password' => 'min:8',
+            'confirm_password' => 'min:8',
         ]);
 
         $user = User::where('id', $id)->first();
         $user->name = $request->get('name');
         $user->email = $request->get('email');
-        $user->save();
-        
-        if ($request->file('image')) {
-            if ($user->profile_path && file_exists(storage_path('app/public/'.$user->profile_path))) {
-                Storage::delete('public/'.$user->profile_path);
-            } 
-            $image_name = $request->file('image')->store('user_profiles', 'public');
-        } else {
-            $image_name = $user->profile_path;
+        $pwd = $request->get('password');
+        $pwd1 = $request->get('confirm_password');
+        if ($pwd !== $pwd1) {
+            return redirect()->route('user.edit_password', $user->id)
+            ->with('error', 'Password does not match');
+        } 
+        else {
+            $user->password = Hash::make($pwd);
+            $user->save();
+            
+            if ($request->file('image')) {
+                if ($user->profile_path && file_exists(storage_path('app/public/'.$user->profile_path))) {
+                    Storage::delete('public/'.$user->profile_path);
+                } 
+                $image_name = $request->file('image')->store('user_profiles', 'public');
+            } else {
+                $image_name = $user->profile_path;
+            }
+            $user->profile_path = $image_name;
+            $user->save();
+            
+            return redirect()->route('user.index')
+            ->with('success', 'Data Updated Successfully');
         }
-        $user->profile_path = $image_name;
-        $user->save();
-        
-        return redirect()->route('user.index')
-        ->with('success', 'Profile Updated Successfully');
     }
 
     /**
@@ -108,24 +119,10 @@ class UserController extends Controller
     {
         //
     }
+    
     public function edit_password($id)
     {
         $user = User::where('id', $id)->first();
         return view('user.edit_password', compact('user'));
-    }
-    
-    public function update_password(Request $request, $id)
-    {
-        $request->validate([
-            'password' => 'required',
-        ]);
-
-        $user = User::where('id', $id)->first();
-        $pwd = $request->get('password');
-        $user->password = Hash::make($pwd); 
-        $user->save();
-        
-        return redirect()->route('user.profile')
-        ->with('success', 'Profile Updated Successfully');
     }
 }
