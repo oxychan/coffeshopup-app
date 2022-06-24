@@ -32,8 +32,8 @@
                         @foreach ($orders as $order)
                             <div class="job-box d-md-flex align-items-center justify-content-between mb-30" onclick="window.location.href = '/order/show/' + '{{$order->id}}'">
                                 <div class="job-left my-4 d-md-flex align-items-center flex-wrap">
-                                    <div class="img-holder mr-md-4 mb-md-0 mb-4 mx-auto mx-md-0 d-md-none d-lg-flex bg-success">
-                                        Paid
+                                    <div class="img-holder mr-md-4 mb-md-0 mb-4 mx-auto mx-md-0 d-md-none d-lg-flex {{ ($order->status == 0) ? 'bg-warning' : 'bg-success' }}">
+                                        {!! ($order->status == 0) ? '<small>Unpaid</small>' : 'Paid' !!}
                                     </div>
                                     <div class="job-content">
                                         <h5 class="text-center text-md-left">Order Token: {{ $order->token }}</h5>
