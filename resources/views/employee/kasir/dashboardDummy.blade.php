@@ -1,1 +1,0 @@
-<h1 class="fw-bold display-1">Ini adalah halaman employee/kasir</h1>

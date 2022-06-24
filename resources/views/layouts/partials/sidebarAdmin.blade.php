@@ -1,7 +1,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav">
     <li class="nav-item nav-profile">
-      <a href="{{ route('employee.staff.show_profile', auth()->user()->employee->id ) }}" class="nav-link">
+      <a href="#" class="nav-link">
         <div class="nav-profile-image">
           @if (auth()->user()->profile_path != NULL)
           @php
@@ -23,9 +23,21 @@
         <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
       </a>
     </li>
+    {{--  <li class="nav-item">
+      <a class="nav-link" href="/staff-dapur/dashboard">
+        <span class="menu-title">Dashboard</span>
+        <i class="mdi mdi-home menu-icon"></i>
+      </a>
+    </li>  --}}
     <li class="nav-item">
-      <a class="nav-link" href="{{ route('menu.index') }}">
-        <span class="menu-title">Menus Table</span>
+      <a class="nav-link" href="/admin/employee">
+        <span class="menu-title">Employees Table</span>
+        <i class="mdi mdi-table-large menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('report.index') }}">
+        <span class="menu-title">Sales Report</span>
         <i class="mdi mdi-table-large menu-icon"></i>
       </a>
     </li>

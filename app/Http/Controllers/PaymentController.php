@@ -6,6 +6,7 @@ use App\Models\Payment;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
+Use PDF;
 
 class PaymentController extends Controller
 {
@@ -54,18 +55,20 @@ class PaymentController extends Controller
             'employee_id' => 'required',
             'order' => 'required',
             'payment' => 'required',
-            'change' => 'required',
         ]);
         
         $payment = new Payment;
         $payment->employee_id = $request->get('employee_id');
         $payment->payment = $request->get('payment'); 
-        $payment->change = $request->get('change');
 
         $order = new Order;
         $order->id = $request->get('order');
+
+        $py = Payment::with('order')->where('id', $order->id)->first();
+        $payment->change = $request->get('payment') - $py->order->total;
         
         $payment->order()->associate($order);
+        
         $payment->save();
         
         return redirect()->route('payment.index')
@@ -119,5 +122,13 @@ class PaymentController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function print($id)
+    {
+        $payment = Payment::with('order')->where('id', $id)->first();
+        
+        $pdf = PDF::loadview('employee.kasir.payment.print', ['payment' => $payment]);
+        return $pdf->stream();
     }
 }
