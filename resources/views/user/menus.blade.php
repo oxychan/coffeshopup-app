@@ -5,7 +5,9 @@
 <section class="menu-area pt-4" id="coffee">
 	<div class="container">
 		<a class="btn btn-warning" id="show-cart" href="{{ route('cart') }}">Show cart</a>
-		<a class="btn btn-warning" id="show-orders" href="{{ route('order.all', auth()->user()->id) }}">My Orders</a>
+		@auth
+			<a class="btn btn-warning" id="show-orders" href="{{ route('order.all', auth()->user()->id) }}">My Orders</a>	
+		@endauth
 		<div class="row d-flex justify-content-center">
 			<form action="#" method="GET">
 				<div class="input-group mb-3">
@@ -295,5 +297,5 @@
 			
 		});
 
-	</scr>
+	</script>
 @endsection
