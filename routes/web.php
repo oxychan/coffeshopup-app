@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ReportController;
@@ -23,13 +25,30 @@ use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
-Route::get('/all-menus', function() {
-    return view('user.menus');
-})->name('user.menus')->withoutMiddleware(['role:admin', 'role:employee']);
+Route::get('/cart', function() {
+    return view('user.cart');
+})->name('cart');
 
-Route::get('/all-menus/beverages', [MenuController::class, 'getBeverageData']);
+Route::get('check-auth', [CartController::class, 'checkAuth'])->name('auth.check');
+Route::post('cart/add', [CartController::class, 'store'])->name('cart.store');
+Route::get('cart/fetch', [CartController::class, 'fetchById'])->name('fetch');
+Route::post('cart/delete/{id}', [CartController::class, 'destroy'])->name('destroy');
+Route::post('cart/deletes/{userid}', [CartController::class, 'massDestroy'])->name('destroy.all');
+Route::post('order/add/{id}', [OrderController::class, 'store'])->name('order.store');
+Route::get('order/show/{id}', [OrderController::class, 'show'])->name('order.show');
+Route::get('orders/{id}', [OrderController::class, 'fetchAll'])->name('order.all');
+Route::get('ongder', function() {
+    return view('user.orders');
+});
 
-Route::get('/all-menus/foods', [MenuController::class, 'getFoodData']);
+Route::prefix('all-menus')->group(function() {
+    Route::get('/', [MenuController::class, 'allMenus'])->name('user.menus')->withoutMiddleware(['role:admin', 'role:kasir', 'role:staff-dapur']);
+    Route::get('/beverages', [MenuController::class, 'getBeverageData'])->withoutMiddleware(['role:admin', 'role:kasir', 'role:staff-dapur']);
+    Route::get('/foods', [MenuController::class, 'getFoodData'])->withoutMiddleware(['role:admin', 'role:kasir', 'role:staff-dapur']);
+    Route::get('/fetch-all', [MenuController::class, 'getAllMenus'])->withoutMiddleware(['role:admin', 'role:kasir', 'role:staf-dapur']);
+});
+
+Route::get('/menu/show/{id}', [MenuController::class, 'getMenu']);
 
 Auth::routes(['verify' => true]);
 

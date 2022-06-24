@@ -150,23 +150,27 @@ class MenuController extends Controller
         ->with('success', 'Menu Deleted Successfully'); 
     }
 
+    public function allMenus()
+    {   
+        $data = Menu::where('type', 'beverage')->paginate(9);
+        $foodMenus = Menu::where('type', 'food')->paginate(9);
+        return view('user.menus', compact('data', 'foodMenus'));
+    }
+
     public function getBeverageData(Request $request)
     {
         if( $request->ajax() ) 
         {
             if ($request->get('query') != '') {
-                $menus = Menu::where('type', 'beverage')
+                $data = Menu::where('type', 'beverage')
                     ->where('name', 'like', '%' . $request->get('query') .'%')
-                    ->orWhere('type', 'like', '%' . $request->get('query') . '%')
-                    ->get();
-                return response()->json([
-                    'menus'=>$menus,
-                ]);
+                    ->paginate(9);
+
+                return view('user.beverage-paginate', compact('data'))->render();
             } else {
-                $menus = Menu::where('type', 'beverage')->get();
-                return response()->json([
-                    'menus'=>$menus,
-                ]);
+                $data = Menu::where('type', 'beverage')->paginate(9);
+                
+                return view('user.beverage-paginate', compact('data'));
             }
 
         } 
@@ -180,17 +184,45 @@ class MenuController extends Controller
             if ($request->get('query') != '') {
                 $menus = Menu::where('type', 'food')
                     ->where('name', 'like', '%' . $request->get('query') .'%')
-                    ->orWhere('type', 'like', '%' . $request->get('query') . '%')
-                    ->get();
-                return response()->json([
-                    'menus'=>$menus,
-                ]);
+                    ->paginate(9);
+                    
+                return view('user.food-paginate', ['foodMenus' => $menus])->render();
             } else {
-                $menus = Menu::where('type', 'food')->get();
-                return response()->json([
-                    'menus'=>$menus,
-                ]);
+                $menus = Menu::where('type', 'food')->paginate(9);
+                
+                return view('user.food-paginate', ['foodMenus' => $menus]);
             }
+        }
+    }
+
+    public function getMenu(Request $request)
+    {
+        if($request->ajax())
+        {
+            $id = $request->id;
+            $menu = Menu::find($id);
+            // dd($menu);
+            // $jsonVar = response()->json($menu);
+            // dd(json_decode($menu));
+
+            return response()->json([
+                'menu' => $menu
+            ]);
+        }
+    }
+
+    public function getAllMenus(Request $request)
+    {
+        if($request->ajax())
+        {
+            $menu = Menu::all();
+
+            // dd(json_decode($menu));
+            return response()->json([
+                'menus' => $menu,
+            ]);
+
+            // dd($data);
         }
     }
 
