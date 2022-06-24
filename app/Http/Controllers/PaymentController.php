@@ -61,16 +61,18 @@ class PaymentController extends Controller
         $payment->employee_id = $request->get('employee_id');
         $payment->payment = $request->get('payment'); 
 
-        $order = new Order;
-        $order->id = $request->get('order');
+        $id = $request->get('order');
 
-        $py = Payment::with('order')->where('id', $order->id)->first();
-        $payment->change = $request->get('payment') - $py->order->total;
+        $order = Order::find($id);
+        $payment->change = $request->get('payment') - $order->total;
         
         $payment->order()->associate($order);
         
         $payment->save();
         
+        $order->status = 1;
+        $order->save();
+
         return redirect()->route('payment.index')
         ->with('success', 'Payment Added Successfully');
     }

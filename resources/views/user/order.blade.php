@@ -8,6 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/orderStyle.css') }}">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <title>Order Detail</title>
 </head>
 <body>
@@ -28,7 +30,18 @@
                             
                             @foreach ($orders->orderDetail as $od)
                                 <div class="d-flex justify-content-between">
-                                    <span class="font-weight-bold">{{$od->menu->name}}(Qty:{{ $od->qty }})</span>
+                                    @php
+                                        $name = explode(" ",$od->menu->name);
+                                        $names = '';
+                                        if(count($name) > 2):
+                                            $names = $name[0] . " " . $name[1] . " " . $name[2];
+                                        elseif(count($name) < 2):
+                                            $names = $name[0];
+                                        else:
+                                            $names = $name[0] . " " . $name[1];
+                                        endif;
+                                    @endphp
+                                    <span class="font-weight-bold">{{$names}}(Qty:{{ $od->qty }})</span>
                                     <span class="text-muted">Rp {{ number_format($od->menu->price * $od->qty, 2, ',', '.') }}</span>
                                 </div>
                             @endforeach                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
@@ -37,9 +50,16 @@
                                 <span class="font-weight-bold">Total</span>
                                 <span class="font-weight-bold theme-color">Rp {{ number_format($orders->total, 2, ',', '.') }}</span>
                             </div>              
-                            <p class="mt-5 text-center fw-bolder">Goto cashier and scan it to finish order</p>
-                            <div class="text-center mt-5">            
-                                {{ $qrcode }}
+                            <div class="text-center mt-5"> 
+                                @if($orders->status == 0)           
+                                    <p class="mt-5 text-center fw-bolder">Goto cashier and scan it to finish order</p>
+                                    {{ $qrcode }}
+                                @else
+                                    <p class="text-center fw-bolder">Order complete! Have a nice day</p>
+                                    <div class="d-flex justify-content-center">
+                                        <i class="fa-solid fa-circle-check " style="color: rgb(102, 231, 102); font-size: 10rem;"></i>
+                                    </div>
+                                @endif
                             </div>                   
         
                         </div>

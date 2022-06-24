@@ -86,4 +86,23 @@ class OrderController extends Controller
 
         return view('user.orders', compact('orders'));
     }
+
+    public function fetchByToken($token)
+    {
+        $orders = Order::with('orderDetail', 'user', 'orderDetail.menu')
+            ->where('token', $token)
+            ->get()->first();
+        // dd($orders);
+        if($orders) {
+            return response()->json([
+                'code' => 200,
+                'orders' => $orders,
+            ]);
+        } else {
+            return response()->json([
+                'code' => 400,
+                'message' => 'error when trying to fetch data',
+            ]);
+        }
+    }
 }

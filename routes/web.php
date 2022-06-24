@@ -36,6 +36,7 @@ Route::post('cart/delete/{id}', [CartController::class, 'destroy'])->name('destr
 Route::post('cart/deletes/{userid}', [CartController::class, 'massDestroy'])->name('destroy.all');
 Route::post('order/add/{id}', [OrderController::class, 'store'])->name('order.store');
 Route::get('order/show/{id}', [OrderController::class, 'show'])->name('order.show');
+
 Route::get('orders/{id}', [OrderController::class, 'fetchAll'])->name('order.all');
 Route::get('ongder', function() {
     return view('user.orders');
@@ -117,6 +118,7 @@ Route::group(['middleware' => ['auth', 'role:kasir']], function() {
         Route::resource('/kasir/payment', PaymentController::class);
         Route::get('/kasir/payment/print/{id}', [PaymentController::class, 'print'])->name('print_payment');
         
+        Route::get('/kasir/payment/order/{token}', [OrderController::class, 'fetchByToken'])->name('order.fetchByToken');
         // Route::get('/ui-features/buttons', function () {
         //     return view('layouts.partials.ui-features.buttons');
         // });

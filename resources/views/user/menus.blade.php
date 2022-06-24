@@ -44,7 +44,6 @@
 			
 		</div>
 	</div>
-	<button id="test">test</button>
 </section>
 
 <!-- Modal -->

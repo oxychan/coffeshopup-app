@@ -216,6 +216,7 @@
             $.ajax({
                 type: "POST",
                 url: "/cart/deletes/" + userId,
+                async: false,
                 data: {
                     user_id: userId,
                 },

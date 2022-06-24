@@ -46,25 +46,25 @@
                             <tr>
                                 <td>{{ $orderDetail->menu->name }}</td>
                                 <td>{{ $orderDetail->qty }}</td>
-                                <td>{{
-                                    $orderDetail->menu->price * $orderDetail->qty
+                                <td>Rp {{
+                                    number_format($orderDetail->menu->price * $orderDetail->qty, 2, ',', '.')
                                     }}</td>
                             </tr>
                             @endforeach
                             <tr>
                                 <th></th>
                                 <th>Total</th>
-                                <td>{{$payment->order->total}}</td>
+                                <td>Rp {{number_format($payment->order->total, 2, ',', '.')}}</td>
                             </tr>
                             <tr>
                                 <th></th>
                                 <th>Payment</th>
-                                <td>{{$payment->payment}}</td>
+                                <td>Rp {{number_format($payment->payment, 2, ',', '.')}}</td>
                             </tr>
                             <tr>
                                 <th></th>
                                 <th>Change</th>
-                                <td>{{$payment->change}}</td>
+                                <td>Rp {{number_format($payment->change, 2, ',', '.')}}</td>
                             </tr>
                         </table>
                     </div>
