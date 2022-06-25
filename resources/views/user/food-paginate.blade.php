@@ -1,6 +1,6 @@
 <div class="row all-menus" id="food-menus">
     @foreach ($foodMenus as $menu)
-        <div class="col-sm-4" id="menu" >
+        <div class="col-sm-4 menu" id="menu" data-menuid="{{ $menu->id }}">
             <div class="single-menu">
                 <div class="row">
                     <div class="col-md-6">
@@ -10,7 +10,7 @@
                         <h4>{{ $menu->name }}</h4>
                         <hr>
                         <span><strong>Stock : </strong>{{ $menu->stock }} </span><br>
-                        <span><strong>Rp. {{ $menu->harga }}</strong></span>
+                        <span><strong>Rp. {{ number_format($menu->price,2,',','.') }}</strong></span>
                     </div>
                 </div>
             </div>

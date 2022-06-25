@@ -180,7 +180,7 @@
         }
 
         function orders(userId) {
-            // store to orders and order details table
+            // store to orders and order details 
             // orders need {id_user, total, order_date}
             $.ajaxSetup({
                 headers: {
@@ -197,6 +197,7 @@
                 },
                 success: function(response) {
                     console.log(response);
+                    consle.log(response.message);
                     if(response.odCode == 200) {
                         removeAllItems(userId);
 
@@ -280,9 +281,22 @@
 
         $(document).on('click', '#order', function(event) {
             event.preventDefault();
-            var carts = fetch();
+            var carts;
+            if(status) {
+                carts = fetch();
+
+            } else {
+                carts = localStorage.getItem("cart");
+
+                carts = JSON.parse(carts);
+            }
 
             let id = $('#user_id').val();
+            if(id == undefined) {
+                alert('login first');
+                window.location.href = "/login";
+            }
+
             if(carts.length < 1) {
                 alert('cannot checkout, please add item(s) to yor cart!');
             } else {

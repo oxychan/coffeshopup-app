@@ -137,7 +137,7 @@
 
             function onScanSuccess(decodedText, decodedResult) {
                 // Handle on success condition with the decoded text or result.
-                if (decodedText == "0DrVthDj7I") {
+                if (true) {
                     console.log("masuk dong");
                     html5QrcodeScanner.clear();
                     
