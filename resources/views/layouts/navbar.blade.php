@@ -40,7 +40,7 @@
                             <div><a class="dropdown-item" style="color: rgb(20, 2, 0);" href="{{ route('user.profile') }}">Profile</a></div>
                             <div><a class="dropdown-item" style="color: rgb(20, 2, 0);" href="{{ route('cart') }}">Chart</a></div>
                             <div><a class="dropdown-item" style="color: rgb(20, 2, 0);"
-                                    href="{{ route('order.all',  auth()->user()->id) }}">My Order</a></div>
+                                    href="{{ route('order.all',  auth()->user()->id) }}">My Orders</a></div>
                         </div>
                     </li>
                     <li>

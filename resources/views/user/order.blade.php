@@ -14,6 +14,11 @@
 </head>
 <body>
     <div class="container mb-5 mt-5">
+        <div class="h3">
+            <a href="{{ route('order.all', auth()->user()->id) }}">
+                <i class="fa fa-arrow-left text-sm pr-2 text-white font-weight-bold"></i>
+            </a>
+        </div>
         <div class="col-md-6 m-auto" id="staticBackdrop">
             <div class="modal-dialog">
                 <div class="modal-content">
