@@ -1,12 +1,11 @@
 @extends('layouts.allMenuLayout')
 
+@section('title', 'Coffeeup | All Menus')
+
 @section('container')
 <div class="d-flex" style="height: 74px; background-color: rgba(20, 2, 0, 0.8);"></div>
 <section class="menu-area pt-4" id="coffee">
 	<div class="container">
-		@auth
-			<a class="btn btn-warning" id="show-orders" href="{{ route('order.all', auth()->user()->id) }}">My Orders</a>	
-		@endauth
 		<div class="row d-flex justify-content-center">
 			<form action="#" method="GET">
 				<div class="input-group mb-3">
