@@ -197,13 +197,17 @@
                 },
                 success: function(response) {
                     console.log(response);
-                    console.log(response.message);
                     if(response.odCode == 200) {
                         removeAllItems(userId);
                         stockReduction(response.order_id);
                         window.location.href = "/order/show/" + response.order_id;
                     }
-                }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    if(errorThrown == "Forbidden") {
+                        window.location.href = "{{route('verification.notice')}}";
+                    }
+                },
             });
         }
 

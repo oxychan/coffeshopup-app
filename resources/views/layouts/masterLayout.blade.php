@@ -31,6 +31,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/animate.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+
+    @yield('additional-css')
 </head>
 
 <body>
