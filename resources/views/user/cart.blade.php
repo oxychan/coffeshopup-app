@@ -197,10 +197,10 @@
                 },
                 success: function(response) {
                     console.log(response);
-                    consle.log(response.message);
+                    console.log(response.message);
                     if(response.odCode == 200) {
                         removeAllItems(userId);
-
+                        stockReduction(response.order_id);
                         window.location.href = "/order/show/" + response.order_id;
                     }
                 }
@@ -267,6 +267,23 @@
                 showItems(tempCart);
             }
             
+        }
+
+        function stockReduction(order_id) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                url: 'order/menu/update/' + order_id,
+                type: 'PUT',
+                async: false,
+                success: function(response) {
+                    console.log(response);
+                }
+            });
         }
 
         $(document).on('click', '#remove-item', function() {

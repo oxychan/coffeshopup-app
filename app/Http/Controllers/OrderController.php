@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Menu;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use Illuminate\Support\Str;
@@ -103,6 +104,20 @@ class OrderController extends Controller
                 'code' => 400,
                 'message' => 'error when trying to fetch data',
             ]);
+        }
+    }
+
+    public function updateStock($order_id)
+    {
+        $orders = Order::with('orderDetail', 'orderDetail.menu')->find($order_id);
+
+        // dd($orders);
+
+        foreach($orders->orderDetail as $OD) {
+            $menu =new Menu;
+            $menu = $OD->menu;
+            $menu->stock -= $OD->qty;
+            $menu->save();
         }
     }
 }

@@ -42,6 +42,8 @@ Route::get('ongder', function() {
     return view('user.orders');
 });
 
+Route::put('order/menu/update/{order_id}', [OrderController::class, 'updateStock'])->name('order.stockUpdate');
+
 Route::prefix('all-menus')->group(function() {
     Route::get('/', [MenuController::class, 'allMenus'])->name('user.menus')->withoutMiddleware(['role:admin', 'role:kasir', 'role:staff-dapur']);
     Route::get('/beverages', [MenuController::class, 'getBeverageData'])->withoutMiddleware(['role:admin', 'role:kasir', 'role:staff-dapur']);

@@ -56,7 +56,7 @@
                             <tr>
                                 <th></th>
                                 <th>Total</th>
-                                <td>Rp {{number_format($payment->order->total, 2, ',', '.s')}}</td>
+                                <td>Rp {{number_format($payment->order->total, 2, ',', '.')}}</td>
                             </tr>
                             <tr>
                                 <th></th>
