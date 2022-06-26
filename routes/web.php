@@ -34,12 +34,15 @@ Route::post('cart/add', [CartController::class, 'store'])->name('cart.store');
 Route::get('cart/fetch', [CartController::class, 'fetchById'])->name('fetch');
 Route::post('cart/delete/{id}', [CartController::class, 'destroy'])->name('destroy');
 Route::post('cart/deletes/{userid}', [CartController::class, 'massDestroy'])->name('destroy.all');
-Route::post('order/add/{id}', [OrderController::class, 'store'])->name('order.store');
+
 Route::get('order/show/{id}', [OrderController::class, 'show'])->name('order.show');
+
 Route::get('orders/{id}', [OrderController::class, 'fetchAll'])->name('order.all');
 Route::get('ongder', function() {
     return view('user.orders');
 });
+
+Route::put('order/menu/update/{order_id}', [OrderController::class, 'updateStock'])->name('order.stockUpdate');
 
 Route::prefix('all-menus')->group(function() {
     Route::get('/', [MenuController::class, 'allMenus'])->name('user.menus')->withoutMiddleware(['role:admin', 'role:kasir', 'role:staff-dapur']);
@@ -65,6 +68,9 @@ Route::group(['middleware' => ['auth', 'role:buyer']], function() {
     Route::get('/user/edit_password/{id}', [UserController::class, 'edit_password'])
     ->middleware('verified')->name('user.edit_password'); // email must verified before accesing this route or page
 
+    Route::post('order/add/{id}', [OrderController::class, 'store'])
+        ->name('order.store')
+        ->middleware('verified');
     // route for user
         Route::resource('user', UserController::class)->middleware('verified');
 });
@@ -117,6 +123,7 @@ Route::group(['middleware' => ['auth', 'role:kasir']], function() {
         Route::resource('/kasir/payment', PaymentController::class);
         Route::get('/kasir/payment/print/{id}', [PaymentController::class, 'print'])->name('print_payment');
         
+        Route::get('/kasir/payment/order/{token}', [OrderController::class, 'fetchByToken'])->name('order.fetchByToken');
         // Route::get('/ui-features/buttons', function () {
         //     return view('layouts.partials.ui-features.buttons');
         // });

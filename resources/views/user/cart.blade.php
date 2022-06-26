@@ -180,7 +180,7 @@
         }
 
         function orders(userId) {
-            // store to orders and order details table
+            // store to orders and order details 
             // orders need {id_user, total, order_date}
             $.ajaxSetup({
                 headers: {
@@ -197,9 +197,10 @@
                 },
                 success: function(response) {
                     console.log(response);
+                    console.log(response.message);
                     if(response.odCode == 200) {
                         removeAllItems(userId);
-
+                        stockReduction(response.order_id);
                         window.location.href = "/order/show/" + response.order_id;
                     }
                 }
@@ -216,6 +217,7 @@
             $.ajax({
                 type: "POST",
                 url: "/cart/deletes/" + userId,
+                async: false,
                 data: {
                     user_id: userId,
                 },
@@ -267,6 +269,23 @@
             
         }
 
+        function stockReduction(order_id) {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                url: 'order/menu/update/' + order_id,
+                type: 'PUT',
+                async: false,
+                success: function(response) {
+                    console.log(response);
+                }
+            });
+        }
+
         $(document).on('click', '#remove-item', function() {
             let menu_id = $(this).data('menuid');
             // console.log( $('#cart_id'));
@@ -279,9 +298,22 @@
 
         $(document).on('click', '#order', function(event) {
             event.preventDefault();
-            var carts = fetch();
+            var carts;
+            if(status) {
+                carts = fetch();
+
+            } else {
+                carts = localStorage.getItem("cart");
+
+                carts = JSON.parse(carts);
+            }
 
             let id = $('#user_id').val();
+            if(id == undefined) {
+                alert('login first');
+                window.location.href = "/login";
+            }
+
             if(carts.length < 1) {
                 alert('cannot checkout, please add item(s) to yor cart!');
             } else {

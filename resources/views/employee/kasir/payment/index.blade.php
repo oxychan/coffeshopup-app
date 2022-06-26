@@ -46,7 +46,7 @@
                                     <td>{{ $payment ->order->id }}</td>
                                     <td>{{ $payment ->employee_id }}</td>
                                     <td>{{ $payment ->order->user->name }}</td>
-                                    <td>{{ $payment ->order->total }}</td>
+                                    <td>Rp {{ number_format($payment ->order->total, 2, ',', '.') }}</td>
                                     <td>
                                         <a class="btn btn-info" href="{{ route('payment.show',$payment->id) }}">Detail</a>
                                         <a class="btn btn-primary" href="{{ route('print_payment',$payment->id) }}">Print</a>

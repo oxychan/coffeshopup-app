@@ -44,7 +44,6 @@
 			
 		</div>
 	</div>
-	<button id="test">test</button>
 </section>
 
 <!-- Modal -->
@@ -84,9 +83,7 @@
 			// console.log(selected);
 			if(!localStorage.getItem("cart")) {
 				localStorage.setItem("cart", "[]");
-			}
-
-			
+			}		
 
 			// cart.push(selected);
 
@@ -209,7 +206,7 @@
 			}
 
 			$(document).on('keyup', '#search', function() {
-			var query = $(this).val();				
+				var query = $(this).val();				
 				
 				if ($('#pills-home-tab').hasClass('active')) {
 					var page = $('#hidden_page_beverage').val();
