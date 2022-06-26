@@ -81,6 +81,6 @@ class RegisterController extends Controller
         $this->guard()->logout();
 
         return redirect()->route('login')
-            ->with('success', 'Registrations successfully, please verify your email');
+            ->with('success', 'Registration was successfully, please verify your email');
     }
 }

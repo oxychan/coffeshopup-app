@@ -17,16 +17,36 @@
                                 <h3 class="mb-4">Sign In</h3>
                             </div>
                         </div>
+                        <div class="">
+                            @if(Session::has('error'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ Session::get('error')}}
+                            </div>
+                            @elseif(Session::has('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ Session::get('success')}}
+                            </div>
+                            @endif
+                        </div>
                         <form method="POST" action="{{ route('login') }}" class="signin-form">
                             @csrf
-
                             <div class="form-group mb-3">
                                 <label class="label" for="email">Email</label>
-                                <input type="text" class="form-control" placeholder="Nama" name="email" id="email" required value="{{ old('name') }}">
+                                <input type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Nama" name="email" id="email" required value="{{ old('name') }}">
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <label class="label" for="password">Password</label>
-                                <input type="password" class="form-control" placeholder="Password" name="password" id="password" required>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" name="password" id="password" required>
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>

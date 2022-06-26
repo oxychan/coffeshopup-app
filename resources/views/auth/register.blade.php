@@ -20,19 +20,39 @@
 
                             <div class="form-group mb-3">
                                 <label class="label" for="name">Name</label>
-                                <input type="text" class="form-control" placeholder="Nama" name="name" id="name" required value="{{ old('name') }}">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Nama" name="name" id="name" required value="{{ old('name') }}">
+                                @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <label class="label" for="email">Email</label>
-                                <input type="email" class="form-control" placeholder="Email" name="email" id="email" required value="{{ old('email') }}">
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" name="email" id="email" required value="{{ old('email') }}">
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <label class="label" for="password">Password</label>
-                                <input type="password" class="form-control" placeholder="Password" name="password" id="password" required>
+                                <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" name="password" id="password" required>
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group mb-3">
                                 <label class="label" for="password-confirm">Password Confirmation</label>
-                                <input type="password" class="form-control" placeholder="Confirm password" id="password-confirm" name="password_confirmation" required>
+                                <input type="password" class="form-control @error('password-confirm') is-invalid @enderror" placeholder="Confirm password" id="password-confirm" name="password_confirmation" required>
+                                @error('password-confirm')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign Up</button>
