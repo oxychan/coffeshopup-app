@@ -27,20 +27,30 @@
                 <ul class="nav-menu">
                     <li class="menu-active"><a href="{{ route('index') }}">Home</a></li>
                     <li><a href="{{ route('user.menus') }}">Menu</a></li>
-                    <li><a id="show-cart" href="{{ route('cart') }}">Show cart</a></li>
                     @guest
+                    <li><a id="show-cart" href="{{ route('cart') }}">Show cart</a></li>
                     <li><a href="{{ route('login') }}" class="btn text-white" style="font-size: 14px; background-color: #b68834;">Login</a></li>
                     @endguest
                     @auth
+                    <li class="dropdown show">
+                        <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{auth()->user()->name }}
+                        </a>
+                        <div class="dropdown-menu navbar-dropdown col-3" aria-labelledby="dropdownMenuLink">
+                            <div><a class="dropdown-item" style="color: rgb(20, 2, 0);" href="{{ route('user.profile') }}">Profile</a></div>
+                            <div><a class="dropdown-item" style="color: rgb(20, 2, 0);" href="{{ route('cart') }}">Chart</a></div>
+                            <div><a class="dropdown-item" style="color: rgb(20, 2, 0);"
+                                    href="{{ route('order.all',  auth()->user()->id) }}">My Order</a></div>
+                        </div>
+                    </li>
                     <li>
                         <form action="/logout" method="post">
                             @csrf
-                            <li><a href="{{ route('user.profile') }}">Profile</a></li>
-                            <a class="text-white">Halo {{auth()->user()->name }}, </a>
-                            <input class="btn text-white mx-1" style="font-size: 14px; background-color: #b68834;" type="submit" value="Logout">
+                            <input class="btn text-white mx-1" style="font-size: 14px; background-color: #b68834;" type="submit"
+                                value="Logout">
+                            <input type="hidden" name="id_user" id="id_user" value="{{ auth()->user()->id }}">
                         </form>
                     </li>
-
                     @endauth
                 </ul>
             </nav><!-- #nav-menu-container -->
