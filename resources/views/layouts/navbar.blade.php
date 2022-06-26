@@ -46,7 +46,7 @@
                     <li>
                         <form action="/logout" method="post">
                             @csrf
-                            <input class="btn text-white mx-1" style="font-size: 14px; background-color: #b68834;" type="submit"
+                            <input class="btn text-white mx-1" style="font-size: 14px; background-color: #b68834;" type="submit" onclick="confirm('Are you sure want to logout?')"
                                 value="Logout">
                             <input type="hidden" name="id_user" id="id_user" value="{{ auth()->user()->id }}">
                         </form>

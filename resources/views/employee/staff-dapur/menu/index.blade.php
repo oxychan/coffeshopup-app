@@ -52,7 +52,7 @@
                                 @foreach ($paginate as $menu)
                                 <tr>
                                     <td>{{ $menu ->id }}</td>
-                                    <td>{{ $menu ->name }}</td>
+                                    <td style="width: 270px">{{ $menu ->name }}</td>
                                     <td>{{ $menu ->price }}</td>
                                     <td>{{ $menu ->stock }}</td>
                                     @if ($menu->menu_photo_path != NULL)
@@ -65,14 +65,14 @@
                                     @endphp
                                     @endif
                                     <td><img class="rounded" width="50px" height="50px" src="{{ asset('storage/' . $img)}}" alt="" srcset=""></td>
-                                    <td>
+                                    <td style="max-width: 200px">
                                         <div class="d-flex">
-                                            <a class="btn btn-info mx-1" href="{{ route('menu.show',$menu->id) }}">Show</a>
+                                            <a class="btn btn-info" href="{{ route('menu.show',$menu->id) }}">Show</a>
                                             <a class="btn btn-primary mx-1" href="{{ route('menu.edit',$menu->id) }}">Edit</a>
                                             <form action="{{ route('menu.destroy',$menu->id) }}" method="POST">
                                                 @method('delete')
                                                 @csrf
-                                                <button class="btn btn-danger mx-1" onclick="return confirm('Are you sure want to delete this menu?')">Delete</button>
+                                                <button class="btn btn-danger" onclick="return confirm('Are you sure want to delete this menu?')">Delete</button>
                                             </form>
                                         </div>
                                         {{--  <button onclick="show_alert({{$menu->id}})" class="btn btn-danger">Delete</button>  --}}
