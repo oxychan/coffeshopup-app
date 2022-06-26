@@ -1,39 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.masterLayout')
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+@section('title', 'Coffeeup | Shopping Chart')
 
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
-    <title>Shopping Cart</title>
-    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" />
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" /> --}}
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-</head>
+@section('container')
 
-
-<body style="background-color: #d8d4dc;">
+<section class="menu-area" id="coffee">
     @auth
     <input type="hidden" name="user_id" id="user_id" value="{{ auth()->user()->id }}">    
     @endauth
+    <div class="d-flex" style="height: 74px; background-color: rgba(20, 2, 0, 0.8);"></div>
     <div class="py-12">
-        <div class="max-w-md mx-auto bg-gray-100 shadow-lg rounded-lg  md:max-w-5xl">
+        <div class="max-w-md mx-auto bg-white shadow-lg rounded-lg  md:max-w-5xl">
             <div class="md:flex ">
-                <div class="w-full p-4 px-5 py-5">
+                <div class="w-full p-4 px-5">
                     <div class="md:grid md:grid-cols-12 gap-2 ">
                         <div class="col-span-12 p-5">
-                            <button class="btn px-3 py-1"
-                                style="color: #ffbe33; background-color:#202c34; border-radius: 15px; margin-left:85%;">
-                                <a class="text-md font-medium mr-2" style="color: #ffbe33;"
-                                    href="../../product/index.php">Kembali
+                            <button class="btn px-3"
+                                style="color:white; background-color: rgb(20, 2, 0); border-radius: 15px; margin-left:85%;">
+                                <a class="text-md font-medium mr-2 text-white"
+                                    href="{{ route('user.menus') }}">Back
                                 </a>
                                 <i class="fa fa-arrow-right text-sm pr-2"></i>
                             </button>
-                            <h1 class="text-xl font-bold text-gray-800">Shopping Cart</h1>
+                            <h1 class="text-xl font-bold text-gray-800">Shopping Chart</h1>
                             <div class="flex justify-between items-center mt-6 pt-3">
                                 <div class="flex  items-center">
                                 </div>
@@ -51,8 +44,7 @@
                             <div>
                                 <div class="flex justify-between items-center mt-3 pt-3">
                                     <button class="btn px-5 py-1 text-lg font-bold" name="bayarchart" id="order"
-                                        style="color: #ffbe33; background-color:#ffbe33; color: #202c34; border-radius: 15px;">Bayar
-                                        Sekarang
+                                        style="background-color: #b68834; color:white; border-radius: 15px;">Pay Now
                                     </button>
                                     <div class="flex justify-center items-end mr-5">
                                         <span class="text-lg font-medium text-gray-800 mr-3">Total : </span>
@@ -68,7 +60,7 @@
             </div>
         </div>
     </div>
-</body>
+</section>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function() {
@@ -149,7 +141,7 @@
                                 <div class="flex flex-col ml-3">\
                                     <span class="md:text-lg font-medium">' + element.menu.name + '</span>\
                                     <span class="text-s text-gray-400">' + convertIDR(element.menu.price) + '</span>\
-                                    <span class="text-s text-gray-400">Jumlah : ' + element.qty + '</span>\
+                                    <span class="text-s text-gray-400">Qty : ' + element.qty + '</span>\
                                 </div>\
                             </div>\
                             <div class="flex justify-center items-center mr-5">\
@@ -310,7 +302,7 @@
 
             let id = $('#user_id').val();
             if(id == undefined) {
-                alert('login first');
+                alert('You should login first');
                 window.location.href = "/login";
             }
 
@@ -325,4 +317,4 @@
     });
     
 </script>
-</html>
+@endsection

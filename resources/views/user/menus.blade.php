@@ -4,7 +4,6 @@
 <div class="d-flex" style="height: 74px; background-color: rgba(20, 2, 0, 0.8);"></div>
 <section class="menu-area pt-4" id="coffee">
 	<div class="container">
-		<a class="btn btn-warning" id="show-cart" href="{{ route('cart') }}">Show cart</a>
 		@auth
 			<a class="btn btn-warning" id="show-orders" href="{{ route('order.all', auth()->user()->id) }}">My Orders</a>	
 		@endauth

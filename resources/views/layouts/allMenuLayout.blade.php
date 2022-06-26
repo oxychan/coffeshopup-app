@@ -84,8 +84,10 @@
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">
                         <li class="menu-active"><a href="/">Home</a></li>
+                        <li><a href="{{ route('user.menus') }}">Menu</a></li>
+                        <li><a id="show-cart" href="{{ route('cart') }}">Show cart</a></li>
                         @guest
-                            <li><a href="{{ route('login') }}" class="btn btn-primary">Login</a></li>
+                            <li><a href="{{ route('login') }}" style="font-size: 14px; background-color: #b68834;" class="btn text-white">Login</a></li>
                         @endguest
                         @auth
                             <li>

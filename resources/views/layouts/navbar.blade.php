@@ -27,7 +27,7 @@
                 <ul class="nav-menu">
                     <li class="menu-active"><a href="{{ route('index') }}">Home</a></li>
                     <li><a href="{{ route('user.menus') }}">Menu</a></li>
-                    <li><a href="{{ route('user.profile') }}">Profile</a></li>
+                    <li><a id="show-cart" href="{{ route('cart') }}">Show cart</a></li>
                     @guest
                     <li><a href="{{ route('login') }}" class="btn text-white" style="font-size: 14px; background-color: #b68834;">Login</a></li>
                     @endguest
@@ -35,6 +35,7 @@
                     <li>
                         <form action="/logout" method="post">
                             @csrf
+                            <li><a href="{{ route('user.profile') }}">Profile</a></li>
                             <a class="text-white">Halo {{auth()->user()->name }}, </a>
                             <input class="btn text-white mx-1" style="font-size: 14px; background-color: #b68834;" type="submit" value="Logout">
                         </form>
