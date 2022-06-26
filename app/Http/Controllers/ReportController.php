@@ -17,9 +17,11 @@ class ReportController extends Controller
      */
     public function index()
     {
+        
+        $title = "report";
         $report = Payment::with('order')->get();
         $paginate = Payment::orderBy('id', 'asc')->paginate(5);
-        return view('admin.report.index', ['report'=>$report,'paginate'=>$paginate]);
+        return view('admin.report.index', ['report'=>$report,'paginate'=>$paginate, 'title'=>$title]);
     }
 
     /**

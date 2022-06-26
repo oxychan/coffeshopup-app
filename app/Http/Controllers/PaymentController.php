@@ -27,7 +27,6 @@ class PaymentController extends Controller
             return view('employee.kasir.payment.index', ['paginate'=>$paginate]);
         }
         $payment = Payment::with('order')->get();
-        // $order = Order::with('orderDetail')->get();
         $paginate = Payment::orderBy('id', 'asc')->paginate(5);
         return view('employee.kasir.payment.index', ['payment'=>$payment,'paginate'=>$paginate]);
     }
@@ -86,9 +85,6 @@ class PaymentController extends Controller
     public function show($id)
     {
         $payment = Payment::with('order')->where('id', $id)->first();
-        // $orders = $payment->order->orderDetail;
-        // dd($orders);
-
         return view('employee.kasir.payment.detail', compact('payment'));
     }
 

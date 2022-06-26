@@ -19,9 +19,10 @@ class EmployeeController extends Controller
      */
     public function index()
     {
+            $title = "employee";
             $employee = Employee::with('user')->get();
             $paginate = Employee::orderBy('id', 'asc')->paginate(5);
-            return view('admin.employee.index', ['employee'=>$employee,'paginate'=>$paginate]);
+            return view('admin.employee.index', ['employee'=>$employee,'paginate'=>$paginate, 'title'=>$title]);
     }
 
     /**
@@ -32,7 +33,8 @@ class EmployeeController extends Controller
     public function create()
     {
         $user = User::all();
-        return view('admin.employee.create', ['user'=>$user]);
+        $title = "employee";
+        return view('admin.employee.create', ['user'=>$user, 'title'=>$title]);
     }
 
     /**
@@ -86,8 +88,10 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
+        
+        $title = "employee";
         $employee = Employee::with('user')->where('id', $id)->first();
-        return view('admin.employee.detail', compact('employee'));
+        return view('admin.employee.detail', compact('employee', 'title'));
     }
 
     /**
@@ -98,8 +102,10 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
+        
+        $title = "employee";
         $employee = Employee::with('user')->where('id', $id)->first();
-        return view('admin.employee.edit', compact('employee'));
+        return view('admin.employee.edit', compact('employee', 'title'));
     }
 
     /**
