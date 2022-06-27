@@ -35,9 +35,9 @@
                                     <td>{{ $report ->id }}</td>
                                     <td>{{ $report ->employee_id }}</td>
                                     <td>{{ $report ->order->user_id }}</td>
-                                    <td>{{ $report ->order->total }}</td>
-                                    <td>{{ $report ->payment }}</td>
-                                    <td>{{ $report ->change }}</td>
+                                    <td>Rp {{ number_format($report ->order->total, 2, ',', '.')}}</td>
+                                    <td>Rp {{ number_format($report ->payment, 2, ',', '.') }}</td>
+                                    <td>Rp {{ number_format($report ->change, 2, ',', '.') }}</td>
                                     <td>{{ $report ->order->order_date }}</td>
                                 </tr>
                                 @endforeach

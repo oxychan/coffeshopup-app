@@ -1,15 +1,17 @@
 <?php
 
+use App\Mail\OrderMail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 
 /*
@@ -38,6 +40,13 @@ Route::post('cart/deletes/{userid}', [CartController::class, 'massDestroy'])->na
 Route::get('order/show/{id}', [OrderController::class, 'show'])->name('order.show');
 
 Route::get('orders/{id}', [OrderController::class, 'fetchAll'])->name('order.all');
+
+Route::get('order/email/{id}', function($id) {
+    Mail::to('firstnameforoptional@gmail.com')->send(new OrderMail($id));
+
+    return redirect()->route('kasir.index');
+})->name('mail.send');
+
 Route::get('ongder', function() {
     return view('user.orders');
 });
@@ -117,7 +126,7 @@ Route::group(['middleware' => ['auth', 'role:kasir']], function() {
         Route::put('/kasir/update_profile/{id}', [EmployeeController::class, 'update_profile_kasir'])->name('employee.kasir.update_profile');
         Route::put('/kasir/update_password/{id}', [EmployeeController::class, 'update_password_kasir'])->name('employee.kasir.update_password');
         
-        Route::get('/kasir', [PaymentController::class, 'index']);
+        Route::get('/kasir', [PaymentController::class, 'index'])->name('kasir.index');
 
         // route for payment
         Route::resource('/kasir/payment', PaymentController::class);

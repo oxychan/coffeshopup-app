@@ -71,8 +71,12 @@
                     url: "/employee/kasir/payment/order/" + token,
                     method: "GET",
                     async: false,
-                    success: function(response) {                        
-                        orderData = response.orders;
+                    success: function(response) {   
+                        if(response.code == 200) {
+                            orderData = response.orders;
+                        } else {
+                            orderData = {};
+                        }
                     }
                 });
                 return orderData;
@@ -137,21 +141,26 @@
 
             function onScanSuccess(decodedText, decodedResult) {
                 // Handle on success condition with the decoded text or result.
-                if (true) {
-                    console.log("masuk dong");
+                var order = fetchOrderByToken(decodedText);
+                // console.log(Object.keys(order));
+                if (Object.keys(order).length > 0) {
                     html5QrcodeScanner.clear();
                     
-                    var order = fetchOrderByToken(decodedText);
-                    // order = JSON.parse(orderData);
-                    console.log(order.order_detail);
-                    // $('#orderDetail').append('<div>' + order.user.name + '</div>');
+                    if(order.status == 0) {
+                        console.log(order.order_detail);
                     
-                    showOrderData(order);
+                        showOrderData(order);
 
-                    $('#myForm').removeAttr('hidden');
+                        $('#myForm').removeAttr('hidden');
 
-                    $('#order_id').val(order.id);
-                    console.log($('#order_id').val());
+                        $('#order_id').val(order.id);
+                        // console.log($('#order_id').val());
+
+                    } else {
+                        alert('payment done');
+                        location.reload();
+                    }                    
+                    
                 } else {
                     console.log('aw');
                 }

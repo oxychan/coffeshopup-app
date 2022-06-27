@@ -72,7 +72,7 @@ class PaymentController extends Controller
         $order->status = 1;
         $order->save();
 
-        return redirect()->route('payment.index')
+        return redirect()->route('mail.send', $order->id)
         ->with('success', 'Payment Added Successfully');
     }
 
