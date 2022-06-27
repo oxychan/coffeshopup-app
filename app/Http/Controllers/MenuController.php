@@ -50,9 +50,9 @@ class MenuController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'price' => 'required',
-            'stock' => 'required',
+            'name' => 'required|min:3|max:50',
+            'price' => 'required|integer',
+            'stock' => 'required|integer',
             'type' => 'required',
         ]);
 
@@ -108,9 +108,9 @@ class MenuController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'price' => 'required',
-            'stock' => 'required',
+            'name' => 'required|min:3|max:50',
+            'price' => 'required|integer',
+            'stock' => 'required|integer',
             'type' => 'required',
         ]);
 

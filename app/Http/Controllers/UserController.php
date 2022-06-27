@@ -74,10 +74,10 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'min:8',
-            'confirm_password' => 'min:8',
+            'name' => 'required|min:3|max:50',
+            'email' => 'required|email',
+            'password' => 'min:8|max:255',
+            'confirm_password' => 'min:8|max:255',
         ]);
 
         $user = User::where('id', $id)->first();

@@ -47,13 +47,13 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'role_id' => 'required',
-            'password' => 'required',
-            'date_of_birth' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
+            'name' => 'required|min:3|max:50',
+            'email' => 'required|email',
+            'role_id' => 'required|integer',
+            'password' => 'required|min:8|max:255',
+            'date_of_birth' => 'required|date',
+            'address' => 'required|min:3|max:255',
+            'phone' => 'required|min:10|max:15',
             'sex' => 'required',
         ]);
         
@@ -119,13 +119,13 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'user_id' => 'required',
-            'role_id' => 'required',
-            'date_of_birth' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
+            'name' => 'required|min:3|max:50',
+            'email' => 'required|email',
+            'role_id' => 'required|integer',
+            'user_id' => 'required|integer',
+            'date_of_birth' => 'required|date',
+            'address' => 'required|min:3|max:255',
+            'phone' => 'required|min:10|max:15',
             'sex' => 'required',
         ]);
         
@@ -182,9 +182,9 @@ class EmployeeController extends Controller
     public function update_profile_kasir(Request $request, $id)
     {
         $request->validate([
-            'user_id' => 'required',
-            'role_id' => 'required',
-            'name' => 'required',
+            'user_id' => 'required|integer',
+            'role_id' => 'required|integer',
+            'name' => 'required|min:3|max:50',
         ]);
         
         $employee = Employee::with('user')->where('id', $id)->first();
@@ -216,10 +216,10 @@ class EmployeeController extends Controller
     public function update_password_kasir(Request $request, $id)
     {
         $request->validate([
-            'user_id' => 'required',
-            'role_id' => 'required',
-            'password' => 'required|min:8',
-            'confirm_password' => 'required|min:8',
+            'user_id' => 'required|integer',
+            'role_id' => 'required|integer',
+            'password' => 'required|min:8|max:255|',
+            'confirm_password' => 'required|min:8|max:255',
         ]);
         
         $employee = Employee::with('user')->where('id', $id)->first();
@@ -263,9 +263,9 @@ class EmployeeController extends Controller
     public function update_profile_staff(Request $request, $id)
     {
         $request->validate([
-            'user_id' => 'required',
-            'role_id' => 'required',
-            'name' => 'required',
+            'user_id' => 'required|integer',
+            'role_id' => 'required|integer',
+            'name' => 'required|min:3|max:50',
         ]);
         
         $employee = Employee::with('user')->where('id', $id)->first();
@@ -297,10 +297,10 @@ class EmployeeController extends Controller
     public function update_password_staff(Request $request, $id)
     {
         $request->validate([
-            'user_id' => 'required',
-            'role_id' => 'required',
-            'password' => 'required|min:8',
-            'confirm_password' => 'required|min:8',
+            'user_id' => 'required|integer',
+            'role_id' => 'required|integer',
+            'password' => 'required|min:8|max:255',
+            'confirm_password' => 'required|min:8|max:255',
         ]);
         
         $employee = Employee::with('user')->where('id', $id)->first();

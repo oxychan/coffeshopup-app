@@ -51,9 +51,9 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'employee_id' => 'required',
-            'order' => 'required',
-            'payment' => 'required',
+            'employee_id' => 'required|integer',
+            'order' => 'required|integer',
+            'payment' => 'required|integer',
         ]);
         
         $payment = new Payment;
