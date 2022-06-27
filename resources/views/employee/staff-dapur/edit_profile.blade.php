@@ -11,7 +11,8 @@
                 <div class="card">
                     <div class="card-header">
                         <a style="text-decoration: none;" class="text-dark"
-                            href="{{ route('employee.staff.show_profile', auth()->user()->employee->id) }}">Employee Profile / </a>
+                            href="{{ route('employee.staff.show_profile', auth()->user()->employee->id) }}">Employee
+                            Profile / </a>
                         <a style="text-decoration: none;" class="text-dark font-weight-bold" href="#">Edit Employee</a>
                     </div>
                     <div class="card-body">
@@ -25,8 +26,8 @@
                             </ul>
                         </div>
                         @endif
-                        <form method="post" action="{{ route('employee.staff.update_profile', $employee->id) }}" id="myForm"
-                            enctype="multipart/form-data">
+                        <form method="post" action="{{ route('employee.staff.update_profile', $employee->id) }}"
+                            id="myForm" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="user_id" id="user_id" value="{{ $employee->user_id }}">
@@ -34,17 +35,18 @@
                             <input type="hidden" name="password" id="password" value="{{ $employee->user->password }}">
                             <div class="form-group">
                                 <label for="image">Photo Profile</label><br>
-                                @if ($employee->user->profile_path != NULL)
+                                @if (auth()->user()->profile_path != NULL)
                                 @php
-                                $img = $employee->user->profile_path
+                                $img = auth()->user()->profile_path
                                 @endphp
                                 @else
                                 @php
-                                $img = 'images/default_profile.png'
+                                $img = 'user_profiles/employee.png'
                                 @endphp
                                 @endif
                                 <img width="150px" class="mb-3" src="{{ asset('storage/'.$img) }}">
-                                <input type="file" class="form-control" name="image" value="{{$employee->user->profile_path}}">
+                                <input type="file" class="form-control" name="image"
+                                    value="{{$employee->user->profile_path}}">
                             </div>
                             <div class="form-group">
                                 <label for="name">Name</label>

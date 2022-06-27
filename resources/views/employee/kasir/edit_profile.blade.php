@@ -34,13 +34,13 @@
                             <input type="hidden" name="password" id="password" value="{{ $employee->user->password }}">
                             <div class="form-group">
                                 <label for="image">Photo Profile</label><br>
-                                @if ($employee->user->profile_path != NULL)
+                                @if (auth()->user()->profile_path != NULL)
                                 @php
-                                $img = $employee->user->profile_path
+                                $img = auth()->user()->profile_path
                                 @endphp
                                 @else
                                 @php
-                                $img = 'images/default_profile.png'
+                                $img = 'user_profiles/employee.png'
                                 @endphp
                                 @endif
                                 <img width="150px" class="mb-3" src="{{ asset('storage/'.$img) }}">
