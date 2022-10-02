@@ -7,28 +7,28 @@
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title"> Employees Table </h3>
+            <h3 class="page-title" data-id="title">Employees Table</h3>
         </div>
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
                         <div class="float-right my-2 mb-4">
-                            <a class="btn btn-success" href="{{ route('employee.create') }}"> Input Employee</a>
+                            <a class="btn btn-success" href="{{ route('employee.create') }}" data-id="btn-input-emp">Input Employee</a>
                         </div>
 
                         @if ($message = Session::get('success'))
                         <div class="alert alert-success">
-                            <p>{{ $message }}</p>
+                            <p data-id="success-message">{{ $message }}</p>
                         </div>
                         @endif
                         @if ($message = Session::get('error'))
                         <div class="alert alert-error">
-                            <p>{{ $message }}</p>
+                            <p data-id="">{{ $message }}</p>
                         </div>
                         @endif
 
-                        <table class="table table-striped table-hover">
+                        <table class="table table-striped table-hover" data-id="tb-employee">
                             <thead>
                                 <tr>
                                     <th>Employee Id</th>

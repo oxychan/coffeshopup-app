@@ -50,9 +50,9 @@ class EmployeeController extends Controller
             'name' => 'required|min:3|max:50',
             'email' => 'required|email',
             'role_id' => 'required|integer',
-            'password' => 'required|min:8|max:255',
+            'password' => 'required|min:8|max:50',
             'date_of_birth' => 'required|date',
-            'address' => 'required|min:3|max:255',
+            'address' => 'required|min:3|max:50',
             'phone' => 'required|min:10|max:15',
             'sex' => 'required',
         ]);

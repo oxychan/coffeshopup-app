@@ -9,7 +9,7 @@
     </button>
     <ul class="navbar-nav navbar-nav-right">
       <li class="nav-item nav-profile dropdown">
-        <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false" data-id="btn-navbar">
           <div class="nav-profile-img">
             @if (auth()->user()->profile_path != NULL)
             @php
@@ -33,7 +33,7 @@
           <a class="dropdown-item" href="#">
               <form action="/logout" method="post">
                 @csrf
-                <i class="mdi mdi-logout me-2 text-primary"></i><input style="border: none;" class="bg-white text-primary" type="submit" value="Logout">
+                <i class="mdi mdi-logout me-2 text-primary"></i><input style="border: none;" class="bg-white text-primary" type="submit" value="Logout" data-id="btn-logout">
               </form>
             @endauth
             </a>
