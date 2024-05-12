@@ -40,6 +40,6 @@ jobs:
       - name: Docker Buildx Bake and push
         uses: docker/bake-action@v4.5.0
         with:
-          file: docker-compose.yaml
+          files: docker-compose.yaml
           push: true
           set: "tags=${{ secrets.DOCKER_USERNAME }}/coffeshopup:latest"
