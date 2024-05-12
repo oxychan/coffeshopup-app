@@ -6,12 +6,30 @@ name: Basic Workflow
 on:
   push:
     branches:
-    - staging
+      - staging
 jobs:
   my_job:
     name: deploay staging
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v4
-    - name: Hello world
-      run: echo "Hello World!"
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: staging
+
+      - name: Modify docker-compose.yaml to use github secrets
+        run: |
+          sed -i 's|${DB_HOST}|${{ secrets.DB_HOST}}|g' docker-compose.yaml
+          sed -i 's|${DB_DATABASE}|${{ secrets.DB_DATABASE}}|g' docker-compose.yaml
+          sed -i 's|${APP_NAME}|${{ secrets.APP_NAME}}|g' docker-compose.yaml
+          sed -i 's|${DB_USERNAME}|${{ secrets.DB_USERNAME}}|g' docker-compose.yaml
+          sed -i 's|${DB_PASSWORD}|${{ secrets.DB_PASSWORD}}|g' docker-compose.yaml
+          sed -i 's|${MYSQL_ROOT_PASSWORD}|${{ secrets.DB_PASSWORD}}|g' docker-compose.yaml
+          sed -i 's|${MYSQL_DATABASE}|${{ secrets.DB_DATABASE}}|g' docker-compose.yaml
+          cat docker-compose.yaml
+
+      - name: Build and run docker-compose
+        uses: hoverkraft-tech/compose-action@v2.0.0
+        with:
+          compose-file: docker-compose.yaml
+          compose-flags: "-- build"

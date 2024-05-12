@@ -7,6 +7,9 @@ services:
       args:
         - DB_HOST=${DB_HOST}
         - DB_DATABASE=${DB_DATABASE}
+        - APP_NAME=${APP_NAME}
+        - DB_USERNAME=${DB_USERNAME}
+        - DB_PASSWORD=${DB_PASSWORD}
     ports:
       - "9000:9000"
     volumes:
