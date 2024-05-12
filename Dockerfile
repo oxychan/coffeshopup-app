@@ -1,5 +1,11 @@
 FROM php:8.1-fpm
 
+ARG DB_HOST
+ARG DB_DATABASE
+ARG DB_USERNAME
+ARG DB_PASSWORD
+ARG APP_NAME
+
 WORKDIR /var/www
 
 RUN apt-get update && apt-get install -y \
@@ -32,6 +38,14 @@ RUN chown -R www-data:www-data /var/www \
     && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
 COPY .env.example .env
+
+RUN sed -i "s|DB_HOST=.*|DB_HOST=$DB_HOST|g" .env
+RUN sed -i "s|DB_DATABASE=.*|DB_DATABASE=$DB_DATABASE|g" .env
+RUN sed -i "s|DB_USERNAME=.*|DB_USERNAME=$DB_USERNAME|g" .env
+RUN sed -i "s|DB_PASSWORD=.*|DB_PASSWORD=$DB_PASSWORD|g" .env
+RUN sed -i "s|APP_NAME=.*|APP_NAME=$APP_NAME|g" .env
+
+RUN cat .env
 
 RUN php artisan key:generate
 RUN php artisan cache:clear
