@@ -1,0 +1,17 @@
+# This is a basic workflow that is manually triggered
+name: Basic Workflow
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  push:
+    branches:
+    - staging
+jobs:
+  my_job:
+    name: deploay staging
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v4
+    - name: Hello world
+      run: echo "Hello World!"
