@@ -11,19 +11,21 @@ class Menu extends Model
 
     protected $table = 'menus';
     protected $primaryKey = 'id';
-    
-    protected $fillable =[
+
+    protected $fillable = [
         'name',
         'price',
         'stock',
         'menu_photo_path',
     ];
 
-    public function orderDetails() {
-        return $this->hasMany(OrderDetial::class);
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
     }
 
-    public function carts() {
+    public function carts()
+    {
         return $this->hasMany(Cart::class);
     }
 }
